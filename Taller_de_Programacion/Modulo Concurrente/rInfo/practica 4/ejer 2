@@ -1,0 +1,86 @@
+programa ejemplo
+areas
+  area1: AreaP (5,1,5,100)
+  area2: AreaP (10,1,10,100)
+  area3: AreaP (11,1,11,1)
+  area4: AreaP (12,1,12,1)
+  areaG: AreaC(50,50,50,50)
+robots
+  robot kukas
+  variables
+    cantP,intento,a,c,aux:numero
+  comenzar
+    a:=PosAv
+    c:=PosCa
+    aux:=0
+    intento:=0
+    Random(cantP,2,5)
+    mientras(intento < 8)
+      BloquearEsquina(50,50)
+      Pos(50,50)
+      repetir cantP
+        si(HayPapelEnLaEsquina)
+          tomarPapel
+          aux:=aux+1
+      si(cantP > aux)
+        repetir aux
+          si(HayPapelEnLaBolsa)
+            depositarPapel
+            aux:=0
+        Pos(a,c)
+        LiberarEsquina(50,50)
+        intento:=intento+1
+      sino
+        intento:=0
+        Pos(a,c)
+        LiberarEsquina(50,50)
+        repetir aux
+          depositarPapel
+        aux:=0   
+  fin
+  robot productores
+  variables
+    cant,a,c,cont:numero
+    ok: boolean  
+  comenzar
+    cont:=1
+    ok:=V
+    a:= PosAv
+    c:= PosCa
+    mientras(ok)
+      mientras(HayPapelEnLaEsquina)
+        tomarPapel
+        cant:=cant + 1 
+      mover
+      c:=c+1
+      si(cant >= 5)
+        BloquearEsquina(50,50)
+        Pos(50,50)
+        mientras(HayPapelEnLaBolsa)
+          depositarPapel
+        Pos(a,c)
+        LiberarEsquina(50,50)
+        cant:=0
+      cont:=cont +1
+      si(cont = 100)
+        ok:=F
+  fin  
+variables
+  r1: productores
+  r2: productores
+  r3: kukas
+  r4: kukas
+comenzar
+  AsignarArea(r1, area1)
+  AsignarArea(r1, areaG)
+  AsignarArea(r2, area2)
+  AsignarArea(r2, areaG)
+  AsignarArea(r3, area3)
+  AsignarArea(r3, areaG)
+  AsignarArea(r4, area4)
+  AsignarArea(r4, areaG)
+  Iniciar(r1, 5,1)
+  Iniciar(r2, 10,1)
+  Iniciar(r3, 11,1)
+  Iniciar(r4, 12,1)
+fin

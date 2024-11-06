@@ -1,0 +1,77 @@
+programa ejemplo
+procesos
+  proceso limpiarPapeles
+  comenzar
+    si(HayPapelEnLaEsquina)
+      mientras(HayPapelEnLaEsquina)
+        tomarPapel
+  fin
+  proceso limpiarFlores
+  comenzar
+    si(HayFlorEnLaEsquina)
+      mientras(HayFlorEnLaEsquina)
+        tomarFlor
+  fin
+  proceso recorrerAvenidaPar(E numAv: numero)
+  comenzar
+    Pos(numAv, 1)
+    repetir 99
+      limpiarPapeles
+      mover
+  fin
+  proceso recorrerAvenidaImpar(E numAv: numero)
+  comenzar
+    Pos(numAv, 1)
+    repetir 99
+      limpiarFlores
+      mover
+  fin
+areas
+  area1: AreaP(1,1,25,100)
+  area2: AreaP(26,1,50,100)
+  area3: AreaP(51,1,75,100)
+  area4: AreaP(76,1,100,100)
+robots
+  robot robot1
+  variables
+    n:numero
+  comenzar
+    n:=26
+    repetir 24
+      recorrerAvenidaPar(n)
+      n:=n+1
+    limpiarPapeles
+    Pos(76, 1)
+    n:=76
+    repetir 24
+      recorrerAvenidaPar(n)
+      n:=n+1
+    limpiarPapeles
+  fin
+  robot robot2
+  variables
+    n:numero
+  comenzar
+    n:=1
+    repetir 24
+      recorrerAvenidaImpar(n)
+      n:=n+1
+    limpiarFlores
+    Pos(51, 1)
+    n:=51
+    repetir 24
+      recorrerAvenidaImpar(n)
+      n:=n+1
+    limpiarFlores  
+  fin
+variables
+  fermin: robot1
+  valen: robot2
+comenzar
+  AsignarArea(valen, area1)
+  AsignarArea(valen, area3)
+  AsignarArea(fermin, area2)
+  AsignarArea(fermin, area4)
+  Iniciar(valen, 1,1)
+  Iniciar(fermin, 26,1)
+fin

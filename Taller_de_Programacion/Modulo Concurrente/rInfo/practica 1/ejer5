@@ -1,0 +1,107 @@
+{Bienvenidos al entorno CMRE.
+Lo siguiente es un código de ejemplo que implementa un
+proceso que recibe un número de avenida como parámetro,
+se posiciona en esa avenida y la recorre.}
+
+programa ejemplo
+procesos
+  proceso juntarPapeles
+  comenzar
+    si(HayPapelEnLaEsquina)
+      mientras(HayPapelEnLaEsquina)
+        tomarPapel
+  fin
+  proceso depositarPapeles
+  comenzar
+    si(HayPapelEnLaBolsa)
+      mientras(HayPapelEnLaBolsa)
+        depositarPapel
+  fin
+  proceso juntarFlores
+  comenzar
+    si(HayFlorEnLaEsquina)
+      mientras(HayFlorEnLaEsquina)
+        tomarFlor
+  fin
+  proceso depositarFlores
+  comenzar
+    si(HayFlorEnLaBolsa)
+      mientras(HayFlorEnLaBolsa)
+        depositarFlor
+  fin
+  proceso recorrerAvenidaf1
+  comenzar
+    repetir 15
+      juntarFlores
+      mover
+  fin
+  proceso recorrerAvenidaf2
+  comenzar
+    repetir 30
+      juntarFlores
+      mover
+  fin
+  proceso recorrerAvenidap1
+  comenzar
+    repetir 20
+      juntarPapeles
+      mover
+  fin
+  proceso recorrerAvenidap2
+  comenzar
+    repetir 10
+      juntarPapeles
+      mover
+  fin
+areas
+  ciudad: AreaC (1,1,100,100)
+robots
+  robot robot1
+  comenzar
+    derecha
+    recorrerAvenidaf1
+    depositarFlores
+    Pos(1,80)
+    recorrerAvenidaf1
+    depositarFlores
+  fin
+  robot robot2
+  comenzar
+    recorrerAvenidap1
+    depositarPapel
+    Pos(80,80)
+    recorrerAvenidap1
+    depositarPapel
+  fin
+  robot robot3
+  comenzar
+    derecha
+    recorrerAvenidaf2
+    depositarFlores
+    Pos(70,10)
+    recorrerAvenidaf2
+    depositarFlores
+  fin
+  robot robot4
+  comenzar
+    recorrerAvenidap2
+    depositarPapel
+    Pos(15,1)
+    recorrerAvenidap2
+    depositarPapel
+  fin
+variables
+  santi: robot1
+  valen: robot2
+  yoni: robot3
+  fermin: robot4
+comenzar
+  AsignarArea(santi, ciudad)
+  AsignarArea(valen, ciudad)
+  AsignarArea(yoni, ciudad)
+  AsignarArea(fermin, ciudad)
+  Iniciar(santi, 1,75)
+  Iniciar(valen, 75,80)
+  Iniciar(yoni, 70,15)
+  Iniciar(fermin, 10,1)
+fin

@@ -1,0 +1,65 @@
+programa ejemplo
+procesos
+  proceso recorrer(ES cant:numero)
+  comenzar
+    repetir 9
+      si(HayFlorEnLaEsquina)
+        mientras(HayFlorEnLaEsquina)
+          tomarFlor
+          cant:=cant + 1
+      mover  
+    si(HayFlorEnLaEsquina)
+      mientras(HayFlorEnLaEsquina)
+        tomarFlor
+        cant:=cant + 1
+  fin
+  proceso comparaMax(E f:numero; ES fmax:numero)
+  comenzar
+    si(f>fmax)
+      fmax:= f
+  fin
+areas
+  ciudad: AreaC (1,1,100,100)
+robots
+  robot juntador
+  variables
+    f: numero
+  comenzar
+    f:=0
+    derecha
+    recorrer(f)
+    EnviarMensaje(f,robot3)
+  fin
+  robot jefe
+  variables
+    f,fmax: numero
+  comenzar
+    repetir 6
+      RecibirMensaje(f,*)
+      comparaMax(f,fmax)
+    Informar(fmax)
+  fin 
+variables
+  robot1: juntador
+  robot2: juntador
+  robot4: juntador
+  robot5: juntador
+  robot6: juntador
+  robot7: juntador
+  robot3: jefe
+comenzar
+  AsignarArea(robot1, ciudad)
+  AsignarArea(robot2, ciudad)
+  AsignarArea(robot3, ciudad)
+  AsignarArea(robot4, ciudad)
+  AsignarArea(robot5, ciudad)
+  AsignarArea(robot6, ciudad)
+  AsignarArea(robot7, ciudad)
+  Iniciar(robot1, 1,1)
+  Iniciar(robot2, 2,11)
+  Iniciar(robot3, 2,2)
+  Iniciar(robot4, 21,30)
+  Iniciar(robot5, 31,40)
+  Iniciar(robot6, 41,50)
+  Iniciar(robot7, 51,60)
+fin

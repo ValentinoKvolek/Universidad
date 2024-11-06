@@ -1,0 +1,91 @@
+programa ejemplo
+procesos
+  proceso hacerEscalera(ES cantE:numero)
+  variables
+    f,p,altura:numero
+  comenzar
+    f:=0
+    p:=0
+    Random(altura,1,5)
+    repetir 4
+      flores(f)
+      papeles(p)
+      repetir altura
+        flores(f)
+        papeles(p)
+        mover
+      derecha
+      mover
+      repetir 3 
+        derecha
+    si(f>p)
+      cantE:=cantE+1
+  fin
+  proceso flores(ES f: numero)
+  comenzar
+    si(HayFlorEnLaEsquina)
+      mientras(HayFlorEnLaEsquina)
+        tomarFlor
+        f:=f+1
+  fin
+  proceso papeles(ES p: numero)
+  comenzar
+    si(HayPapelEnLaEsquina)
+      mientras(HayPapelEnLaEsquina)
+        tomarPapel
+        p:=p+1
+  fin
+  proceso asignarRobots
+  comenzar
+    EnviarMensaje(1,r1)
+    EnviarMensaje(2,r2)
+    EnviarMensaje(3,r3)
+  fin
+areas
+  ciudad: AreaC (1,1,100,100)
+robots
+  robot juntador
+  variables
+    quien,cantE:numero
+  comenzar
+    cantE:=0
+    RecibirMensaje(quien, theo)
+    hacerEscalera(cantE)
+    EnviarMensaje(quien,theo)
+    EnviarMensaje(cantE,theo)
+  fin
+  robot jefe
+  variables
+    quien,cantTotal,e:numero
+  comenzar
+    cantTotal:=0
+    asignarRobots
+    repetir 3
+      RecibirMensaje(quien,*)
+      si (quien = 1)
+        RecibirMensaje(e,r1)
+        cantTotal:=cantTotal+e
+      sino
+        si(quien = 2)
+          RecibirMensaje(e,r2)
+          cantTotal:=cantTotal+e
+        sino
+          RecibirMensaje(e,r3)
+          cantTotal:=cantTotal+e
+    Informar(cantTotal)
+  fin
+variables
+  r1: juntador
+  r2: juntador
+  r3: juntador
+  theo:jefe
+comenzar
+  AsignarArea(r1, ciudad)
+  AsignarArea(r2, ciudad)
+  AsignarArea(r3, ciudad)
+  AsignarArea(theo, ciudad)
+  Iniciar(theo, 1,1)
+  Iniciar(r1, 2,1)
+  Iniciar(r2, 7,1)
+  Iniciar(r3, 12,1)
+fin

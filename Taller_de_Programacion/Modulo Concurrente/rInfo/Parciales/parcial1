@@ -1,0 +1,198 @@
+programa parcial1
+procesos
+  proceso etapa1
+  variables
+    a,c,cont:numero
+  comenzar
+    cont:=0
+    repetir 19
+      si(HayFlorEnLaEsquina)
+        tomarFlor
+        cont:=cont+1
+      mover
+      a:=PosAv
+      c:=PosCa
+    si(HayFlorEnLaEsquina)
+      tomarFlor
+      cont:=cont+1
+    BloquearEsquina(1,6)
+    Pos(1,6)
+    repetir cont
+      si(HayFlorEnLaBolsa)
+        depositarFlor
+    Pos(a,c)
+    LiberarEsquina(1,6)
+
+  fin
+  proceso etapa2(E id:numero)
+  variables
+    cont:numero
+  comenzar
+    cont:=0
+    repetir 2
+      derecha
+    repetir 19
+      si(HayPapelEnLaEsquina)
+        tomarPapel
+        cont:=cont+1
+      mover
+    BloquearEsquina(1,6)
+    Pos(1,6)
+    repetir cont
+      si(HayPapelEnLaBolsa)
+        depositarPapel
+    posicionarse(id)
+    LiberarEsquina(1,6)
+  fin
+  proceso posicionarse(E id:numero)
+  comenzar
+    si(id = 1)
+      Pos(1,1)
+    sino  
+      si(id = 2)
+        Pos(1,2)
+      sino
+        si(id =  3)
+          Pos(1,3)
+        sino
+          Pos(1,4)
+  fin
+  proceso asignarR
+  comenzar
+    EnviarMensaje(1,r1)
+    EnviarMensaje(2,r2)
+    EnviarMensaje(3,r3)
+    EnviarMensaje(4,r4)
+  fin
+  proceso comenzarEtapa1
+  comenzar
+    EnviarMensaje(V,r1)
+    EnviarMensaje(V,r2)
+    EnviarMensaje(V,r3)
+    EnviarMensaje(V,r4)
+  fin
+  proceso comenzarEtapa2(E id:numero;  E id2:numero)
+  comenzar
+    si(id = 1)
+      EnviarMensaje(V,r1)
+    sino
+      si(id = 2)
+        EnviarMensaje(V,r2)
+      sino
+        si(id = 3)
+          EnviarMensaje(V,r3)
+        sino
+          EnviarMensaje(V,r4)
+    si(id2 = 1)
+      EnviarMensaje(V,r1)
+    sino
+      si(id2 = 2)
+        EnviarMensaje(V,r2)
+      sino
+        si(id2 = 3)
+          EnviarMensaje(V,r3)
+        sino
+          EnviarMensaje(V,r4)
+  fin
+areas
+  area1: AreaP (1,1,20,1)
+  area2: AreaP (1,2,20,2)
+  area3: AreaP (1,3,20,3)
+  area4: AreaP (1,4,20,4)
+  areaJ: AreaP (1,5,1,5)
+  areaT: AreaPC (1,6,1,6)
+robots
+  robot corredor
+  variables
+    id,miCa,miAv:numero
+    ok:boolean
+  comenzar
+    miCa:=PosCa
+    miAv:=PosAv
+    derecha
+    RecibirMensaje(id,rf)
+    RecibirMensaje(ok,rf)
+    etapa1
+    EnviarMensaje(id,rf)
+    RecibirMensaje(ok,rf)
+    si(ok = V)
+      etapa2(id)
+      EnviarMensaje(id,rf)
+    RecibirMensaje(ok,rf)
+    Pos(miAv,miCa)
+  fin
+  robot jefe
+  variables
+    id,id2,aux:numero
+  comenzar
+    asignarR
+    comenzarEtapa1
+    RecibirMensaje(id, *)
+    RecibirMensaje(id2, *)
+    RecibirMensaje(aux, *)
+    RecibirMensaje(aux, *)
+    si(id = 1)
+      EnviarMensaje(V,r1)
+    sino
+      si(id = 2)
+        EnviarMensaje(V,r2)
+      sino
+        si(id = 3)
+          EnviarMensaje(V,r3)
+        sino
+          EnviarMensaje(V,r4)
+    si(id2 = 1)
+      EnviarMensaje(V,r1)
+    sino
+      si(id2 = 2)
+        EnviarMensaje(V,r2)
+      sino
+        si(id2 = 3)
+          EnviarMensaje(V,r3)
+        sino
+          EnviarMensaje(V,r4)
+    EnviarMensaje(F, r1)
+    EnviarMensaje(F, r2)
+    EnviarMensaje(F, r3)
+    EnviarMensaje(F, r4)
+    RecibirMensaje(id, *)
+    si(id = 1)
+      Informar(1)
+    sino
+      si(id = 2)
+        Informar(2)
+      sino
+        si(id = 3)
+          Informar(3)
+        sino
+          Informar(4)
+        EnviarMensaje(F, r1)
+    EnviarMensaje(F, r1)
+    EnviarMensaje(F, r2)
+    EnviarMensaje(F, r3)
+    EnviarMensaje(F, r4)
+    
+  fin
+variables
+  r1: corredor
+  r2: corredor
+  r3: corredor
+  r4: corredor
+  rf: jefe
+comenzar
+  AsignarArea(r1, area1)
+  AsignarArea(r1, areaT)
+  AsignarArea(r2, area2)
+  AsignarArea(r2, areaT)
+  AsignarArea(r3, area3)
+  AsignarArea(r3, areaT)
+  AsignarArea(r4, area4)
+  AsignarArea(r4, areaT)
+  AsignarArea(rf, areaJ)
+  AsignarArea(rf, areaT)
+  Iniciar(r1, 1,1)
+  Iniciar(r2, 1,2)
+  Iniciar(r3, 1,3)
+  Iniciar(r4, 1,4)
+  Iniciar(rf, 1,5)
+fin

@@ -1,0 +1,86 @@
+programa ejemplo
+procesos
+  proceso cosechar(ES cant: numero)
+  comenzar
+    BloquearEsquina(10,10)
+    Pos(10,10)
+    mientras(HayFlorEnLaEsquina)
+      tomarFlor
+      cant:=cant+1
+    Pos(1,5)
+    LiberarEsquina(10,10)
+  fin
+areas
+  area1: AreaP (1,3,100,3)
+  area2: AreaP (1,4,100,4)
+  areaJ: AreaP (1,5,1,5)
+  areaT: AreaC (10,10,10,10)
+robots
+  robot juntador
+  variables
+    cont,contaux,cantF,miAv,miCa: numero
+    termine: boolean
+  comenzar
+    derecha
+    termine:=F
+    cont:=1
+    contaux:=1
+    cantF:=0
+    mientras(cont <> 100)
+      mientras(HayFlorEnLaEsquina)
+        tomarFlor
+        cantF:=cantF + 1
+      mover
+      cont:=cont+ 1
+      contaux:=contaux + 1
+      si(cantF = 10) | (contaux = 5)
+        miAv:= PosAv
+        miCa:= PosCa
+        BloquearEsquina(10,10)
+        Pos(10,10)
+        mientras(HayFlorEnLaBolsa)
+          depositarFlor
+        Pos(miAv,miCa)
+        LiberarEsquina(10,10)
+        EnviarMensaje(V,r3)
+        cantF:=0
+        contaux:=0
+    Informar(2)
+    EnviarMensaje(F,r3)
+  fin
+  robot jefe
+  variables
+    cant:numero
+    termino,ok,aux,aux2:boolean
+  comenzar
+    termino:=V
+    cant:=0
+    aux:=V
+    aux2:=V
+    mientras(aux) | (aux2)
+      RecibirMensaje(ok,*)
+      si(ok = V)
+        cosechar(cant)
+      sino
+        si(aux = V)
+          aux:=F
+        sino
+          si(aux2  = V)
+            aux2:=F
+    Informar(cant) 
+  fin
+variables
+  r1: juntador
+  r2: juntador
+  r3: jefe
+comenzar
+  AsignarArea(r1, area1)
+  AsignarArea(r1, areaT)
+  AsignarArea(r2, area2)
+  AsignarArea(r2, areaT)
+  AsignarArea(r3, areaJ)
+  AsignarArea(r3, areaT)
+  Iniciar(r1, 1,3)
+  Iniciar(r2, 1,4)
+  Iniciar(r3, 1,5)
+fin

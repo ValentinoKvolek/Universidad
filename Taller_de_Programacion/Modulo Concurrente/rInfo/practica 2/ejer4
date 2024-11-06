@@ -1,0 +1,177 @@
+programa ejer4prac2
+procesos
+  proceso juntar(E numAv: numero; E numCa:numero; ES total:numero)
+  comenzar
+    Pos(numAv,numCa )
+    mientras(HayPapelEnLaEsquina)
+      tomarPapel
+      total:=total+1
+    mientras(HayFlorEnLaEsquina)
+      tomarFlor
+      total:=total+1
+  fin
+  proceso asignarR
+  comenzar
+    EnviarMensaje(1,r1)
+    EnviarMensaje(2,r2)
+    EnviarMensaje(3,r3)
+    EnviarMensaje(4,r4)
+  fin
+  proceso elegirRandom
+  variables
+    quien:numero
+  comenzar
+    Random(quien,1,4)
+    si(quien = 1)
+      EnviarMensaje(V,r1)
+    sino
+      si(quien = 2)
+        EnviarMensaje(V,r2)
+      sino
+        si(quien = 3)
+          EnviarMensaje(V,r3)
+        sino
+          EnviarMensaje(V,r4)
+  fin
+  proceso cortarTurno
+  comenzar
+    EnviarMensaje(F,r1)
+    EnviarMensaje(F,r2)
+    EnviarMensaje(F,r3)
+    EnviarMensaje(F,r4)
+  fin
+  proceso obtenerMax(E t1:numero;E t2:numero;E t3:numero;E t4:numero; ES maxr:numero)
+  variables
+    max:numero
+  comenzar
+    max:= -1
+    si t1 > max
+      max := t1
+      maxr := 1
+    si t2 > max
+      max := t2
+      maxr := 2
+    si t3 > max
+      max := t3
+      maxr := 3
+    si t4 > max
+      max := t4
+      maxr := 4
+  fin
+areas
+  cuadrante: AreaPC (25,25,75,75)
+  areaf: AreaP(1,1,1,1)
+  area1: AreaP(25,1,25,1)
+  area2: AreaP(30,1,30,1)
+  area3: AreaP(35,1,35,1)
+  area4: AreaP(40,1,40,1) 
+robots
+  robot juntador
+  variables
+    total,quien,c,a:numero
+    gane,puedo:boolean
+  comenzar
+    gane:=F
+    RecibirMensaje(quien,fiscalizador)
+    RecibirMensaje(puedo,fiscalizador)
+    mientras(puedo)
+      Random(a,25,75)
+      Random(c,25,75)
+      juntar(a,c,total)
+      si(quien = 1)
+        Pos(25,1)
+      sino
+        si(quien = 2 )
+          Pos(30,1)
+        sino
+          si(quien = 3)
+            Pos(35,1)
+          sino
+            Pos(40,1)
+      EnviarMensaje(quien,fiscalizador)
+      EnviarMensaje(total,fiscalizador)
+      RecibirMensaje(puedo,fiscalizador)
+    RecibirMensaje(gane,fiscalizador)
+    si(gane)
+      Pos(50,50)
+  fin
+  robot jefe
+  variables
+    t,t1,t2,t3,t4,quien,id,contador,maxr:numero
+    ok: boolean  
+  comenzar
+    t:=0
+    contador:=10
+    t1:=0
+    t2:=0
+    t3:=0
+    t4:=0
+    maxr:=0
+    asignarR
+    repetir 10
+      Informar(contador)
+      elegirRandom
+      RecibirMensaje(quien,*)
+      si(quien = 1)
+        RecibirMensaje(t,r1)
+        t1:=t1 + t
+      sino
+        si(quien = 2 )
+          RecibirMensaje(t,r2)
+          t2:=t2 + t
+        sino
+          si(quien = 3)
+            RecibirMensaje(t,r3)
+            t3:=t3 + t
+          sino
+            RecibirMensaje(t,r4)
+            t4:=t4 + t
+      contador:=contador -1
+    cortarTurno   
+    obtenerMax(t1,t2,t3,t4,maxr)
+    si(maxr = 1)
+      EnviarMensaje(V,r1)
+      EnviarMensaje(F,r2)
+      EnviarMensaje(F,r3)
+      EnviarMensaje(F,r4)
+    sino
+      si(maxr = 2)
+        EnviarMensaje(F,r1)
+        EnviarMensaje(V,r2)
+        EnviarMensaje(F,r3)
+        EnviarMensaje(F,r4)
+      sino
+        si(maxr = 3)
+          EnviarMensaje(F,r1)
+          EnviarMensaje(F,r2)
+          EnviarMensaje(V,r3)
+          EnviarMensaje(F,r4)
+        sino
+          EnviarMensaje(F,r1)
+          EnviarMensaje(F,r2)
+          EnviarMensaje(F,r3)
+          EnviarMensaje(V,r4)
+    Informar(maxr)  
+  fin
+variables
+  fiscalizador: jefe
+  r1: juntador
+  r2: juntador
+  r3: juntador
+  r4: juntador
+comenzar
+  AsignarArea(r1, cuadrante)
+  AsignarArea(r1, area1)
+  AsignarArea(r2, cuadrante)
+  AsignarArea(r2, area2)
+  AsignarArea(r3, cuadrante)
+  AsignarArea(r3, area3)
+  AsignarArea(r4, cuadrante)
+  AsignarArea(r4, area4)
+  AsignarArea(fiscalizador, areaf)
+  Iniciar(fiscalizador, 1,1)
+  Iniciar(r1, 25,1)
+  Iniciar(r2, 30,1)
+  Iniciar(r3, 35,1)
+  Iniciar(r4, 40,1)
+fin

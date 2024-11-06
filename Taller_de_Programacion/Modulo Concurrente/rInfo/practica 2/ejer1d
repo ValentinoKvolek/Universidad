@@ -1,0 +1,94 @@
+programa ejemplo
+procesos
+  proceso recorrer(ES cant:numero)
+  comenzar
+    repetir 9
+      si(HayFlorEnLaEsquina)
+        mientras(HayFlorEnLaEsquina)
+          tomarFlor
+          cant:=cant + 1
+      mover  
+    si(HayFlorEnLaEsquina)
+      mientras(HayFlorEnLaEsquina)
+        tomarFlor
+        cant:=cant + 1
+  fin
+  proceso comparaMax(E f:numero; E quien:numero; ES fmax:numero; ES quienmax:numero)
+  comenzar
+    si(f>fmax)
+      fmax:= f
+      quienmax:=quien
+  fin
+  proceso asignarIds
+  comenzar
+    EnviarMensaje(1,robot1)
+    EnviarMensaje(2,robot2)
+    EnviarMensaje(4,robot4)
+    EnviarMensaje(5,robot5)
+    EnviarMensaje(6,robot6)
+    EnviarMensaje(7,robot7)
+  fin
+areas
+  ciudad: AreaC (1,1,100,100)
+robots
+  robot juntador
+  variables
+    f,quien: numero
+  comenzar
+    RecibirMensaje(quien,robot3)
+    f:=0
+    derecha
+    recorrer(f)
+    EnviarMensaje(quien,robot3)
+    EnviarMensaje(f,robot3)
+  fin
+  robot jefe
+  variables
+    f,quien,fmax,quienmax: numero
+  comenzar
+    asignarIds
+    repetir 6
+      RecibirMensaje(quien,*)
+      si(quien = 1)
+        RecibirMensaje(f,robot1)
+      sino
+        si(quien = 2)
+          RecibirMensaje(f,robot2)
+        sino
+          si(quien = 4)
+            RecibirMensaje(f,robot4)
+          sino
+            si(quien = 5)
+              RecibirMensaje(f,robot5)
+            sino
+              si(quien = 6)
+                RecibirMensaje(f,robot6)
+              sino
+                RecibirMensaje(f,robot7)
+      comparaMax(f,quien,fmax,quienmax)
+    Informar(quienmax)
+  fin 
+variables
+  robot1: juntador
+  robot2: juntador
+  robot4: juntador
+  robot5: juntador
+  robot6: juntador
+  robot7: juntador
+  robot3: jefe
+comenzar
+  AsignarArea(robot1, ciudad)
+  AsignarArea(robot2, ciudad)
+  AsignarArea(robot3, ciudad)
+  AsignarArea(robot4, ciudad)
+  AsignarArea(robot5, ciudad)
+  AsignarArea(robot6, ciudad)
+  AsignarArea(robot7, ciudad)
+  Iniciar(robot1, 1,1)
+  Iniciar(robot2, 2,11)
+  Iniciar(robot3, 2,2)
+  Iniciar(robot4, 21,30)
+  Iniciar(robot5, 31,40)
+  Iniciar(robot6, 41,50)
+  Iniciar(robot7, 51,60)
+fin

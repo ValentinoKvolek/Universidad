@@ -1,0 +1,117 @@
+programa Parcial2
+procesos
+  proceso asignarR
+  comenzar
+    EnviarMensaje(1, r1)
+    EnviarMensaje(2, r2)
+    EnviarMensaje(3, r3)
+    EnviarMensaje(4, r4)
+  fin
+  proceso juntarFlor(ES cantF:numero; ES cantFaux:numero)
+  comenzar
+    mientras(HayFlorEnLaEsquina)
+      tomarFlor
+      cantF:=cantF+1
+      cantFaux:=cantFaux+1
+  fin
+  proceso hacerLado(ES cantF:numero; ES cantFaux:numero)
+  comenzar
+    repetir 9
+      juntarFlor(cantF,cantFaux)
+      mover
+    juntarFlor(cantF,cantFaux)
+  fin
+  proceso dejarFlores(E cantFaux:numero)
+  variables
+    a,c:numero
+  comenzar
+    a:=PosAv
+    c:=PosCa 
+    BloquearEsquina(20,20)
+    Pos(20,20)
+    repetir cantFaux
+      depositarFlor
+    Pos(a,c)
+    LiberarEsquina(20,20)
+  fin
+areas
+  area1: AreaPC (1,1,11,10)
+  area2: AreaPC (13,1,23,10)
+  areaJ: AreaP (30,1,30,1)
+  areaT: AreaPC(20,20,20,20)
+robots
+  robot primerTanda
+  variables
+    cantF,cantFaux,id,a,c:numero
+  comenzar
+    cantFaux:=0
+    cantF:=0
+    RecibirMensaje(id,rf)
+    hacerLado(cantF,cantFaux)
+    derecha
+    hacerLado(cantF,cantFaux)
+    si(id = 1)
+      EnviarMensaje(V,r2)
+      EnviarMensaje(cantF,r2)
+    sino
+      EnviarMensaje(V,r4)
+      EnviarMensaje(cantF,r4)
+    dejarFlores(cantFaux)
+  fin
+  robot segundaTanda
+  variables
+    ok:boolean
+    cantF,id,cantFaux:numero
+  comenzar
+    cantFaux:=0
+    RecibirMensaje(id,rf)
+    RecibirMensaje(ok,*)
+    RecibirMensaje(cantF, *)
+    repetir 2
+      derecha
+    hacerLado(cantF,cantFaux)
+    derecha
+    hacerLado(cantF,cantFaux)
+    dejarFlores(cantFaux)
+    EnviarMensaje(id,rf)
+    EnviarMensaje(cantF,rf) 
+  fin
+  robot jefe
+  variables
+    id,t,t2,aux:numero
+  comenzar
+    asignarR
+    repetir 2
+      RecibirMensaje(id,*)
+      si(id = 2)
+        RecibirMensaje(t,r2)
+      sino
+        si(id = 4)
+          RecibirMensaje(t2,r4)
+    si(t>t2)
+      Informar(1)
+    sino
+      Informar(2)
+  fin
+variables
+  r1: primerTanda
+  r2: segundaTanda
+  r3: primerTanda
+  r4: segundaTanda
+  rf: jefe
+comenzar
+  AsignarArea(r1, area1)
+  AsignarArea(r1, areaT)
+  AsignarArea(r2, area1)
+  AsignarArea(r2, areaT)
+  AsignarArea(r3, area2)
+  AsignarArea(r3, areaT)
+  AsignarArea(r4, area2)
+  AsignarArea(r4, areaT)
+  AsignarArea(rf, areaJ)
+  Iniciar(r1, 1,1)
+  Iniciar(r2, 11,10)
+  Iniciar(r3, 13,1)
+  Iniciar(r4, 23,10)
+  Iniciar(rf,30,1)
+fin

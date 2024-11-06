@@ -1,0 +1,98 @@
+programa parcial5
+procesos
+  proceso asignarId
+  comenzar
+    EnviarMensaje(1,r1)
+    EnviarMensaje(2,r2)
+    EnviarMensaje(3,r3)
+  fin
+  proceso hacerCuadrado(E l:numero; E aux:numero; E id:numero; ES cant:numero)
+  comenzar
+    repetir 4
+      repetir l
+        mientras(HayFlorEnLaEsquina)
+          tomarFlor
+          cant:=cant+1
+        mover
+      derecha
+    posicionar(id,aux)
+  fin
+  proceso posicionar(E id:numero; E aux:numero)
+  comenzar
+    si(id = 1)
+      Pos(1,aux)
+    sino
+      si(id = 2)
+        Pos(8,aux)
+      sino
+        si(id = 3)
+          Pos(15,aux)
+  fin
+areas
+  area1: AreaP (1,1,6,26)
+  area2: AreaP (8,1,13,26)
+  area3: AreaP (15,1,20,26)
+  areaJ: AreaP (51,1,51,1)
+  areaT: AreaPC(50,50,50,50)
+robots
+  robot juntador
+  variables
+    id,l,aux,cant:numero
+    ok:boolean
+  comenzar
+    cant:=0
+    aux:=1
+    RecibirMensaje(id,rj)
+    repetir 5
+      Random(l,1,5)
+      aux:=aux+l+1
+      hacerCuadrado(l,aux,id,cant)
+      si(id = 1)
+        EnviarMensaje(V,r2)
+        EnviarMensaje(V,r3)
+      sino
+        si(id = 2)
+          EnviarMensaje(V,r1)
+          EnviarMensaje(V,r3)   
+        sino 
+          EnviarMensaje(V,r1)
+          EnviarMensaje(V,r2)   
+      repetir 2
+        RecibirMensaje(ok,*)
+    mientras(cant<>0)
+      BloquearEsquina(50,50)
+      Pos(50,50)
+      si(HayFlorEnLaBolsa)
+        depositarFlor
+      si(id=1)
+        Pos(1,1)
+      sino
+        si(id = 2)
+          Pos(8,1)
+        sino
+          Pos(15,1)
+      LiberarEsquina(50,50)
+      cant:=cant-1
+  fin
+  robot jefe
+  comenzar
+    asignarId
+  fin
+variables
+  r1:juntador
+  r2:juntador
+  r3:juntador
+  rj:jefe
+comenzar
+  AsignarArea(r1, area1)
+  AsignarArea(r1, areaT)
+  AsignarArea(r2, area2)
+  AsignarArea(r2, areaT)
+  AsignarArea(r3, area3)
+  AsignarArea(r3, areaT)
+  AsignarArea(rj, areaJ)
+  Iniciar(r1, 1,1)
+  Iniciar(r2, 8,1)
+  Iniciar(r3, 15,1)
+  Iniciar(rj, 51,1)
+fin

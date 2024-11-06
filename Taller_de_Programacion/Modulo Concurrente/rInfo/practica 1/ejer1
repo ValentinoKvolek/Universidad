@@ -1,0 +1,50 @@
+programa Ejer1prac1
+procesos
+  proceso recorrerAvenida(E numAv: numero; ES f: numero)
+  comenzar
+    Pos(numAv, 1)
+    repetir 99
+      mover
+      mientras(HayFlorEnLaEsquina)
+        tomarFlor
+        f:= f + 1
+  fin
+areas
+  ciudad: AreaC (1,1,100,100)
+robots
+  robot robot1
+  variables
+    f:numero
+  comenzar
+    f:= 0
+    recorrerAvenida(1,f)
+    Informar(f)
+  fin
+  robot robot2
+  variables
+    f:numero
+  comenzar
+    f:= 0
+    recorrerAvenida(3,f)
+    Informar(f)
+  fin
+  robot robot3
+  variables
+    f:numero
+  comenzar
+    f:= 0
+    recorrerAvenida(5,f)
+    Informar(f)
+  fin
+variables
+  wallie: robot1
+  eva: robot2
+  directiva: robot3
+comenzar
+  AsignarArea(wallie, ciudad)
+  AsignarArea(eva, ciudad)
+  AsignarArea(directiva, ciudad)
+  Iniciar(wallie, 1,1)
+  Iniciar(eva, 3,1)
+  Iniciar(directiva, 5,1)
+fin

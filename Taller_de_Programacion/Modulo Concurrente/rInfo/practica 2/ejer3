@@ -1,0 +1,89 @@
+programa ejer3prac2
+procesos
+  proceso recorrerAvenidaA(ES p:numero)
+  comenzar
+    derecha
+    repetir 9
+      papeles(p)
+      mover 
+  fin
+  proceso recorrerAvenidaB(ES f:numero)
+  comenzar
+    derecha
+    repetir 9
+      flores(f)
+      mover 
+  fin
+  proceso papeles(ES p: numero)
+  comenzar
+    si(HayPapelEnLaEsquina)
+      mientras(HayPapelEnLaEsquina)
+        tomarPapel
+        p:=p+1
+  fin
+  proceso flores(ES f: numero)
+  comenzar
+    si(HayFlorEnLaEsquina)
+      mientras(HayFlorEnLaEsquina)
+        tomarFlor
+        f:=f+1
+  fin
+areas
+  areaA: AreaPC (1,1,20,1)
+  areaB: AreaPC (1,5,20,5)
+robots
+  robot equipoA
+  variables
+    p,total:numero
+  comenzar
+    p:=0
+    total:=0
+    recorrerAvenidaA(p)
+    total:=p
+    EnviarMensaje(total,A2)
+  fin
+  robot equipoA2
+  variables
+    p,total:numero
+  comenzar
+    RecibirMensaje(total,A1)
+    p:=0
+    recorrerAvenidaA(p)
+    total:=total+p
+    Informar(total)
+  fin
+  robot equipoB
+  variables
+    f,total:numero
+  comenzar
+    f:=0
+    total:=0
+    recorrerAvenidaB(f)
+    total:=f
+    EnviarMensaje(total,B2)
+  fin
+  robot equipoB2
+  variables
+    f,total:numero
+  comenzar
+    RecibirMensaje(total,B1)
+    f:=0
+    recorrerAvenidaB(f)
+    total:=total+f
+    Informar(total)
+  fin
+variables
+  A1: equipoA
+  A2: equipoA2
+  B1: equipoB
+  B2: equipoB2
+comenzar
+  AsignarArea(A1, areaA)
+  AsignarArea(A2, areaA)
+  AsignarArea(B1, areaB)
+  AsignarArea(B2, areaB)
+  Iniciar(A1, 1,1)
+  Iniciar(A2, 11,1)
+  Iniciar(B1, 1,5)
+  Iniciar(B2, 11,5)
+fin

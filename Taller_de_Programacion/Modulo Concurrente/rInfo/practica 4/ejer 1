@@ -1,0 +1,103 @@
+programa ejer1
+procesos
+  proceso asignar
+  comenzar
+    EnviarMensaje(1,r1)
+    EnviarMensaje(2,r2)
+    EnviarMensaje(3,r3)
+  fin
+areas
+  Aservidor: AreaP(100,100,100,100)
+  area1: AreaPC(1,1,1,100)
+  area2: AreaPC(2,1,2,100)
+  area3: AreaPC(3,1,3,100)
+robots
+  robot servidor
+  variables
+    quien,cantF,a,c,aux:numero
+  comenzar
+    asignar
+    repetir 3
+      RecibirMensaje(quien,*)
+      si(quien = 1)
+        RecibirMensaje(cantF,r1)
+        RecibirMensaje(a,r1)
+        RecibirMensaje(c,r1)
+        BloquearEsquina(a,c)
+        Pos(a,c)
+        repetir cantF
+          depositarFlor
+        Pos(100,100)
+        LiberarEsquina(a,c)
+        EnviarMensaje(V,r1)
+      sino
+        si(quien = 2)
+          RecibirMensaje(cantF,r2)
+          RecibirMensaje(a,r2)
+          RecibirMensaje(c,r2)
+          Pos(a,c)
+          repetir cantF
+            depositarFlor
+          Pos(100,100)
+          EnviarMensaje(V,r2)
+        sino
+          RecibirMensaje(cantF,r3)
+          RecibirMensaje(a,r3)
+          RecibirMensaje(c,r3)
+          Pos(a,c)
+          repetir cantF
+            depositarFlor
+          Pos(100,100)
+          EnviarMensaje(V,r3)
+    repetir 3
+      RecibirMensaje(aux,*)
+  fin
+  robot cliente
+  variables
+    cantF,quien,a,c,aux,cont:numero
+    termino:boolean
+  comenzar
+    RecibirMensaje(quien, r4)
+    a:=PosAv
+    c:=PosCa
+    cont:= 1
+    aux:=c+1
+    Random(cantF,1,4)
+    EnviarMensaje(quien, r4)
+    EnviarMensaje(cantF, r4)
+    EnviarMensaje(a, r4)
+    EnviarMensaje(aux, r4)
+    RecibirMensaje(termino, r4)
+    si(termino)
+      Pos(a,aux)
+      mientras(HayFlorEnLaEsquina)
+        tomarFlor
+      Pos(a,c)
+      repetir 99
+        mover
+        si(HayFlorEnLaBolsa)
+          depositarFlor
+        cont:= cont + 1
+      si(cont = 100)
+        EnviarMensaje(0,r4)
+      sino
+        Pos(a,c) 
+  fin
+variables
+  r1: cliente
+  r2: cliente
+  r3: cliente
+  r4: servidor
+comenzar
+  AsignarArea(r1, area1)
+  AsignarArea(r2, area2)
+  AsignarArea(r3, area3)
+  AsignarArea(r4,Aservidor)
+  AsignarArea(r4,area1)
+  AsignarArea(r4,area2)
+  AsignarArea(r4,area3)
+  Iniciar(r1, 1,1)
+  Iniciar(r2, 2,1)
+  Iniciar(r3, 3,1)
+  Iniciar(r4,100,100)
+fin

@@ -1,0 +1,151 @@
+programa parcial3
+procesos
+  proceso asignarR
+  comenzar
+    EnviarMensaje(1,r1)
+    EnviarMensaje(2,r2)
+    EnviarMensaje(3,r3)
+  fin
+  proceso enviarTam
+  variables
+    n:numero
+  comenzar
+    Random(n,1,6)
+    EnviarMensaje(n,r1)
+    Random(n,1,6)
+    EnviarMensaje(n,r2)
+    Random(n,1,6)
+    EnviarMensaje(n,r3)
+  fin
+  proceso juntarFlores(ES cant:numero)
+  comenzar
+    mientras(HayFlorEnLaEsquina)
+      tomarFlor
+      cant:=cant+1
+  fin
+  proceso cuadrado(E n:numero; ES cant:numero)
+  comenzar
+    cant:=0
+    repetir 4
+      repetir n
+        juntarFlores(cant)
+        mover
+      derecha
+  fin
+  proceso dejarFlores(E aux:numero; E id:numero; E cant:numero)
+  variables
+    a1,c1:numero
+  comenzar
+    a1:=PosAv
+    c1:=PosCa
+    mientras(cant<>0)
+      BloquearEsquina(50,50)
+      Pos(50,50)
+      si(HayFlorEnLaBolsa)
+        depositarFlor
+      Pos(a1,c1)
+      LiberarEsquina(50,50)
+      cant:= cant-1
+    posicionar(aux,id)
+    
+  fin
+  proceso posicionar(E aux:numero; E id:numero)
+  comenzar
+    si(id = 1)
+      Pos(1,aux)
+    sino
+      si(id = 2)
+        Pos(10,aux)
+      sino
+        Pos(20,aux)
+  fin
+  proceso jFlores(E cant:numero)
+  comenzar
+    BloquearEsquina(50,50)
+    Pos(50,50)
+    repetir cant
+      si(HayFlorEnLaEsquina)
+        tomarFlor
+    Pos(100,100)
+    LiberarEsquina(50,50)
+  fin
+areas
+  area1: AreaP (1,1,7,22)
+  area2: AreaP (10,1,16,22)
+  area3: AreaP (20,1,26,22)
+  areaT: AreaC(50,50,50,50)
+  areaJ: AreaP(100,100,100,100)
+robots
+  robot recolectores
+  variables
+    id,n,aux,cant:numero
+  comenzar
+    RecibirMensaje(id,rj)
+    RecibirMensaje(n,rj)
+    aux:=n+2
+    repetir 3
+      cuadrado(n,cant)
+      dejarFlores(aux,id,cant)
+      EnviarMensaje(id,rj)
+      EnviarMensaje(cant,rj)
+      aux:=aux + n + 1
+  fin
+  robot jefe
+  variables
+    id,t1,t2,t3,taux,max,rmax,cant:numero
+  comenzar
+    t1:=0
+    t2:=0
+    t3:=0
+    max:=-1
+    rmax:=0
+    asignarR
+    enviarTam
+    repetir 9
+      RecibirMensaje(id,*)
+      si(id=1)
+        RecibirMensaje(cant,r1)
+        t1:=t1+cant
+        jFlores(cant)
+      sino
+        si(id =2)
+          RecibirMensaje(cant,r2)
+          t2:=t2+cant
+          jFlores(cant)
+        sino
+          RecibirMensaje(cant,r3)
+          t3:=t3+cant
+          jFlores(cant)
+    repetir 3
+      si(t1>max)
+        max:=t1
+        rmax:=1
+      sino
+        si(t2>max)
+          max:=t2
+          rmax:=2
+        sino
+          si(t3>max)
+            max:=t3
+            rmax:=3
+    Informar(rmax)  
+  fin
+variables
+  r1: recolectores
+  r2: recolectores
+  r3: recolectores
+  rj: jefe
+comenzar
+  AsignarArea(r1, area1)
+  AsignarArea(r1, areaT)
+  AsignarArea(r2, area2)
+  AsignarArea(r2, areaT)
+  AsignarArea(r3, area3)
+  AsignarArea(r3, areaT)
+  AsignarArea(rj, areaJ)
+  AsignarArea(rj, areaT)
+  Iniciar(r1, 1,1)
+  Iniciar(r2, 10,1)
+  Iniciar(r3, 20,1)
+  Iniciar(rj, 100,100)
+fin

@@ -1,0 +1,99 @@
+programa parcial7
+procesos
+  proceso asignarID
+  comenzar
+    EnviarMensaje(1,r1)
+    EnviarMensaje(2,r2)
+    EnviarMensaje(3,r3)
+  fin
+  proceso posicionarme(E id:numero)
+  comenzar
+    si(id=1)
+      Pos(1,1)
+    sino
+      si(id=2)
+        Pos(2,1)
+      sino
+        Pos(3,1)
+  fin
+areas
+  area1: AreaP(1,1,1,1)
+  area2: AreaP(2,1,2,1)
+  area3: AreaP(3,1,3,1)
+  areaJ: AreaP(9,9,9,9)
+  areaT: AreaPC(10,10,30,30)
+robots
+  robot florero
+  variables 
+    id,n,a,c:numero
+  comenzar
+    RecibirMensaje(id,rj) 
+    Random(n,2,5)
+    repetir n
+      EnviarMensaje(V,rj)
+      EnviarMensaje(id,rj)
+      RecibirMensaje(a,rj)
+      RecibirMensaje(c,rj)
+      BloquearEsquina(a,c)
+      Pos(a,c)
+      mientras(HayFlorEnLaEsquina)
+        tomarFlor
+      posicionarme(id)
+      LiberarEsquina(a,c)
+    EnviarMensaje(F,rj)
+  fin
+  robot jefe
+  variables
+    a,c,cant,id:numero
+    aux,ok1,ok2,ok3:boolean
+  comenzar
+    cant:=0
+    ok1:=V
+    ok2:=V
+    ok3:=V
+    asignarID
+    mientras((ok1)| (ok2) | (ok3))
+      RecibirMensaje(aux,*)
+      si(aux = V)
+        cant:=cant+1
+        RecibirMensaje(id,*)
+        Random(a,10,30)
+        Random(c,10,30)
+        si(id=1)
+          EnviarMensaje(a,r1)
+          EnviarMensaje(c,r1)
+        sino
+          si(id = 2)
+            EnviarMensaje(a,r2)
+            EnviarMensaje(c,r2)
+          sino
+            EnviarMensaje(a,r3)
+            EnviarMensaje(c,r3)
+      sino
+        si(ok1=V)
+          ok1:=F
+        sino
+          si(ok2 = V)
+            ok2:=F
+          sino
+            ok3:=F
+    Informar(cant)
+  fin
+variables
+  r1: florero
+  r2: florero
+  r3: florero
+  rj: jefe
+comenzar
+  AsignarArea(r1, area1)
+  AsignarArea(r1, areaT)
+  AsignarArea(r2, area2)
+  AsignarArea(r2, areaT)
+  AsignarArea(r3, area3)
+  AsignarArea(r3, areaT)
+  AsignarArea(rj, areaJ)
+  Iniciar(r1, 1,1)
+  Iniciar(r2, 2,1)
+  Iniciar(r3, 3,1)
+  Iniciar(rj, 9,9)
+fin

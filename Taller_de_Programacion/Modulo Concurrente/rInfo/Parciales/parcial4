@@ -1,0 +1,118 @@
+programa parcial4
+procesos
+  proceso hacerEscalon(E alto: numero;  E ancho:numero; ES cant:numero)
+  variables
+    a,c:numero
+  comenzar
+    repetir alto
+      si(HayPapelEnLaEsquina)
+        cant:=cant+1
+        mientras(HayPapelEnLaEsquina)
+          tomarPapel
+      mover
+    a:=PosAv
+    c:=PosCa
+    dejarPapeles(a,c)
+    derecha
+    repetir ancho
+      si(HayPapelEnLaEsquina)
+        cant:=cant+1
+        mientras(HayPapelEnLaEsquina)
+          tomarPapel
+      mover
+    a:=PosAv
+    c:=PosCa
+    dejarPapeles(a,c)
+    repetir 3
+      derecha
+  fin
+  proceso dejarPapeles(E a:numero; E c:numero)
+  comenzar
+    BloquearEsquina(99,99)
+    Pos(99,99)
+    mientras(HayPapelEnLaBolsa)
+      depositarPapel
+    Pos(a,c)
+    LiberarEsquina(99,99)
+  fin
+  proceso asignarID
+  comenzar
+    EnviarMensaje(1,r1)
+    EnviarMensaje(2,r2)
+    EnviarMensaje(3,r3)
+  fin
+  proceso comenzarEtapa
+  comenzar
+    EnviarMensaje(V,r1)
+    EnviarMensaje(V,r2)
+    EnviarMensaje(V,r3)
+  fin
+  proceso finalizar
+  comenzar
+    EnviarMensaje(F,r1)
+    EnviarMensaje(F,r2)
+    EnviarMensaje(F,r3)
+  fin
+areas
+  areaT: AreaC (99,99,99,99)
+  area1: AreaP (2,1,18,13)
+  area2: AreaP (32,1,48,13)
+  area3: AreaP (62,1,78,13)
+  areaj: AreaP (1,1,1,1)
+robots
+  robot papelero
+  variables
+    id,alto,ancho,cant:numero
+    ok:boolean
+  comenzar
+    cant:=0
+    RecibirMensaje(id,rj)
+    Random(alto,1,3)
+    Random(ancho,2,4)
+    RecibirMensaje(ok,rj)
+    mientras(ok)
+      hacerEscalon(alto,ancho,cant)
+      EnviarMensaje(id,rj)
+      RecibirMensaje(ok,rj)
+    EnviarMensaje(cant,rj)
+  fin
+  robot jefe
+  variables
+    caux,cant,id:numero
+  comenzar
+    caux:=0
+    cant:=0 
+    asignarID
+    repetir 4
+      comenzarEtapa
+      repetir 3
+        RecibirMensaje(id,*)
+    finalizar
+    repetir 3
+      RecibirMensaje(caux,*)
+      cant:=cant+caux
+    Pos(99,99)
+    mientras(HayPapelEnLaEsquina)
+      tomarPapel
+    Pos(1,1)
+    Informar(cant)
+  fin
+variables
+  r1: papelero
+  r2: papelero
+  r3: papelero
+  rj: jefe
+comenzar
+  AsignarArea(r1, area1)
+  AsignarArea(r1, areaT)
+  AsignarArea(r2, area2)
+  AsignarArea(r2, areaT)
+  AsignarArea(r3, area3)
+  AsignarArea(r3, areaT)
+  AsignarArea(rj, areaj)
+  AsignarArea(rj, areaT)
+  Iniciar(r1, 2,1)
+  Iniciar(r2, 32,1)
+  Iniciar(r3, 62,1)
+  Iniciar(rj, 1,1)
+fin

@@ -1,0 +1,103 @@
+programa ejer5
+procesos
+  proceso asignarR
+  comenzar
+    EnviarMensaje(1,r1)
+    EnviarMensaje(2,r2)
+    EnviarMensaje(3,r3)
+  fin
+  proceso dejarPapeles(E papeles:numero)
+  comenzar
+    BloquearEsquina(100,1)
+    Pos(100,1)
+    repetir papeles
+      depositarPapel
+    Pos(13,1)
+    LiberarEsquina(100,1)
+  fin
+  proceso posicionar(E id:numero)
+  comenzar
+    si(id = 1)
+      Pos(10,1)
+    sino
+      si(id = 2)
+        Pos(11,1)
+      sino
+        Pos(12,1)
+    LiberarEsquina(100,1)
+  fin
+areas
+  area1: AreaP (10,1,10,1)
+  area2: AreaP (11,1,11,1)
+  area3: AreaP (12,1,12,1)
+  areaS: AreaP (13,1,13,1)
+  areaT: AreaC (100,1,100,1)
+robots
+  robot servidor
+  variables
+    id,papeles:numero
+    ok1,ok2,ok3,peticion :boolean
+  comenzar
+    ok1:=V
+    ok2:=V
+    ok3:=V
+    asignarR
+    mientras((ok1) | (ok2) | (ok3))
+      RecibirMensaje(peticion, *)
+      Random(papeles,1,5)
+      si(peticion = V)
+        RecibirMensaje(id,*)
+        si(id = 1)
+          dejarPapeles(papeles)
+          EnviarMensaje(papeles,r1)
+        sino
+          si(id = 2)
+            dejarPapeles(papeles)
+            EnviarMensaje(papeles,r2)
+          sino
+            dejarPapeles(papeles)
+            EnviarMensaje(papeles,r3)
+      sino
+        si(ok1 = V)
+          ok1:=F
+        sino
+          si(ok2 = V)
+            ok2:=F
+          sino
+            ok3:=F
+  fin
+  robot cliente
+  variables
+    id,p:numero
+  comenzar
+    RecibirMensaje(id,rs)
+    repetir 4
+      EnviarMensaje(V,rs)
+      EnviarMensaje(id,rs)
+      RecibirMensaje(p,rs)
+      BloquearEsquina(100,1)
+      Pos(100,1)
+      repetir p
+        tomarPapel
+      posicionar(id)
+    EnviarMensaje(F,rs)
+  fin
+variables
+  r1: cliente
+  r2: cliente
+  r3: cliente
+  rs: servidor
+comenzar
+  AsignarArea(r1, area1)
+  AsignarArea(r1, areaT)
+  AsignarArea(r2, area2)
+  AsignarArea(r2, areaT)
+  AsignarArea(r3, area3)
+  AsignarArea(r3, areaT)
+  AsignarArea(rs, areaS)
+  AsignarArea(rs, areaT)
+  Iniciar(r1, 10,1)
+  Iniciar(r2, 11,1)
+  Iniciar(r3, 12,1)
+  Iniciar(rs, 13,1)
+fin

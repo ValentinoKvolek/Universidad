@@ -1,0 +1,147 @@
+programa ejer2
+procesos
+  proceso juntarFlores(ES total:numero)
+  comenzar
+    mientras(HayFlorEnLaEsquina)
+      tomarFlor
+      total:=total+1 
+  fin
+  proceso juntarPapeles(ES total:numero)
+  comenzar
+    mientras(HayPapelEnLaEsquina)
+      tomarPapel
+      total:=total+1 
+  fin
+  proceso izquierda
+  comenzar
+    repetir 3
+      derecha
+  fin
+  proceso recorrerF(E quien: numero)
+  variables
+    n,cant:numero
+    sigo:boolean
+  comenzar
+    n:=5
+    sigo:= V
+    cant:=0
+    mientras(sigo)
+      repetir 4
+        repetir n
+          juntarFlores(cant)
+          mover
+        derecha
+        juntarFlores(cant)
+        repetir n
+          mover
+        juntarFlores(cant)
+        repetir 3
+          derecha
+        n:=n-1
+      mover
+      derecha
+      BloquearEsquina(16,16)
+      mover
+      EnviarMensaje(quien,r3)
+      repetir 2
+        derecha
+      mover
+      LiberarEsquina(16,16)
+      n:=2
+      repetir 4
+        repetir n
+          mover
+        derecha
+        repetir n
+          mover
+        n:=n+1
+        izquierda        
+      RecibirMensaje(sigo,r3)
+    Informar(cant)
+  fin
+  proceso recorrerP(E quien: numero)
+  variables
+    n,cant:numero    
+    sigo:boolean
+  comenzar
+    n:=5
+    cant:=0
+    sigo:=V
+    mientras(sigo)
+      repetir 4
+        juntarPapeles(cant)
+        repetir n
+          mover
+        izquierda
+        juntarPapeles(cant)
+        repetir n
+          mover
+        derecha
+        n:=n-1
+      mover
+      izquierda
+      BloquearEsquina(16,16)
+      mover
+      EnviarMensaje(quien,r3)
+      repetir 2
+        derecha
+      mover
+      LiberarEsquina(16,16)
+      n:=2
+      repetir 4
+        repetir n
+          mover
+        repetir 3
+          derecha
+        repetir n
+          mover
+        derecha
+        n:=n+1
+      RecibirMensaje(sigo,r3)
+    Informar(cant)
+  fin
+areas
+  ciudad: AreaC (1,1,100,100)
+robots
+  robot robot1
+  variables
+    quien:numero
+  comenzar
+    RecibirMensaje(quien,r3)
+    recorrerF(quien)
+  fin
+  robot robot2
+  variables
+    quien:numero
+  comenzar
+    RecibirMensaje(quien,r3)
+    recorrerP(quien)
+  fin
+  robot jefe
+  variables
+    quien,winner:numero
+  comenzar
+    EnviarMensaje(1,r1)
+    EnviarMensaje(2,r2)
+    RecibirMensaje(quien,*)
+    si(quien = 1)
+      winner:=1
+    sino
+      winner:=2
+    RecibirMensaje(quien,*)
+    EnviarMensaje(F,r1)
+    EnviarMensaje(F,r2)
+    Informar(winner)
+  fin
+variables
+  r1: robot1
+  r2: robot2
+  r3: jefe
+comenzar
+  AsignarArea(r1, ciudad)
+  AsignarArea(r2, ciudad)
+  AsignarArea(r3, ciudad)
+  Iniciar(r1, 1,1)
+  Iniciar(r2, 31,1)
+  Iniciar(r3, 15,1)
+fin

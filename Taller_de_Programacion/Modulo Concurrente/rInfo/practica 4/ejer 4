@@ -1,0 +1,94 @@
+programa ejer4
+procesos
+  proceso asignarR
+  comenzar
+    EnviarMensaje(1,r1)
+    EnviarMensaje(2,r2)
+  fin
+  proceso recogerflores
+  comenzar
+    mientras(HayFlorEnLaEsquina)
+      tomarFlor
+  fin
+  proceso recogerpapel
+  comenzar
+    mientras(HayPapelEnLaEsquina)
+      tomarPapel
+  fin
+  proceso vaciarbolsa
+  comenzar
+    mientras(HayFlorEnLaBolsa)
+      depositarFlor
+    mientras(HayPapelEnLaBolsa)
+      depositarPapel
+  fin
+areas
+  areaJefe: AreaP (1,1,1,1)
+  area1: AreaP (2,1,2,1)
+  area2: AreaP (3,1,3,1)
+  areaT: AreaPC(2,2,100,100)
+robots
+  robot jefe
+  variables
+    tarea,robotAle,a,c:numero
+    ok:boolean
+  comenzar
+    asignarR
+    repetir 10
+      Random(tarea,1,3)
+      Random(robotAle,1,2)
+      Random(a,2,100)
+      Random(c,2,100)
+      si(robotAle = 1)
+        EnviarMensaje(tarea,r1)
+        EnviarMensaje(a,r1)
+        EnviarMensaje(c,r1)
+        RecibirMensaje(ok,r1)
+      sino
+        EnviarMensaje(tarea,r2)
+        EnviarMensaje(a,r2)
+        EnviarMensaje(c,r2)
+        RecibirMensaje(ok,r2)
+    EnviarMensaje(4,r1)
+    EnviarMensaje(4,r2)
+  fin
+  robot trabajador
+  variables
+    quienSoy,tarea,a,c,aI,cI:numero
+  comenzar
+    aI:=PosAv
+    cI:=PosCa
+    tarea:=0
+    RecibirMensaje(quienSoy,r3)
+    mientras(tarea <> 4)
+      RecibirMensaje(tarea,r3)
+      si(tarea<>4)
+        RecibirMensaje(a,r3)
+        RecibirMensaje(c,r3)
+        BloquearEsquina(a,c)
+        Pos(a,c)
+        si(tarea = 1)
+          recogerflores
+        sino
+          si(tarea = 2)
+            recogerpapel
+          sino
+            vaciarbolsa
+        EnviarMensaje(V,r3)
+        Pos(aI,cI)
+        LiberarEsquina(a,c)
+  fin
+variables
+  r1: trabajador
+  r2: trabajador
+  r3: jefe
+comenzar
+  AsignarArea(r1, area1)
+  AsignarArea(r1, areaT)
+  AsignarArea(r2, area2)
+  AsignarArea(r2, areaT)
+  AsignarArea(r3, areaJefe)
+  Iniciar(r3, 1,1)
+  Iniciar(r1, 2,1)
+  Iniciar(r2, 3,1)
+fin

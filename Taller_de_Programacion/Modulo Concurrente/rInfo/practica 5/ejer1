@@ -1,0 +1,147 @@
+programa ejer1
+procesos
+  proceso recorrerAvenida(ES cant:numero; E quien:numero)
+  variables
+    a,c,c2:numero
+  comenzar
+    repetir 96
+      mientras(HayFlorEnLaEsquina)
+        tomarFlor
+        cant:= cant+1
+      mover
+    a:=PosAv
+    c:=PosCa
+    c:=c+1
+    BloquearEsquina(a,c)
+    mover
+    mientras(HayFlorEnLaEsquina)
+      tomarFlor
+      cant:= cant+1
+    c2:=c+1
+    BloquearEsquina(a,c2)
+    mover
+    LiberarEsquina(a,c)
+    mientras(HayFlorEnLaEsquina)
+      tomarFlor
+      cant:= cant+1
+    mover
+    LiberarEsquina(a,c2)
+    mientras(HayFlorEnLaEsquina)
+      tomarFlor
+      cant:= cant+1     
+  fin
+  proceso recorrerCalles(ES cant:numero;  E quien:numero)
+  variables
+    a,c,a2:numero
+  comenzar
+    a:=PosAv
+    c:=PosCa
+    derecha
+    mientras(HayPapelEnLaEsquina)
+      tomarPapel
+      cant:= cant+1
+    a:= a+1
+    BloquearEsquina(a,c)
+    mover
+    mientras(HayPapelEnLaEsquina)
+      tomarPapel
+      cant:= cant+1
+    a2:=a+1
+    BloquearEsquina(a2,c)
+    mover
+    LiberarEsquina(a,c)
+    mientras(HayPapelEnLaEsquina)
+      tomarPapel
+      cant:= cant+1
+    mover
+    LiberarEsquina(a2,c)
+    repetir 96
+      mientras(HayPapelEnLaEsquina)
+        tomarPapel
+        cant:= cant+1
+      mover
+  fin
+  proceso asignarR
+  comenzar
+    EnviarMensaje(1, r1)
+    EnviarMensaje(2, r2)
+    EnviarMensaje(3, a1)
+    EnviarMensaje(4, a2)
+  fin
+areas
+  area1: AreaP (2,1,2,100)
+  area2: AreaP (3,1,3,100)
+  area3: AreaP (1,98,100,98)
+  area4: AreaP (1,99,100,99)
+  areaJ: AreaP (1,1,1,1)
+robots
+  robot rojo
+  variables
+    quien,cant:numero
+  comenzar
+    cant:=0
+    RecibirMensaje(quien,rf)
+    recorrerAvenida(cant,quien)
+    Informar(cant)
+    EnviarMensaje(quien,rf)
+    EnviarMensaje(cant,rf)
+  fin
+  robot azul
+  variables
+    quien,cant:numero
+  comenzar
+    cant:=0
+    RecibirMensaje(quien,rf)
+    recorrerCalles(cant,quien)
+    Informar(cant)
+    EnviarMensaje(quien,rf)
+    EnviarMensaje(cant,rf)
+  fin
+  robot jefe
+  variables
+    cantR:numero
+    cantA:numero
+    quien:numero
+    aux:numero
+  comenzar
+    asignarR
+    repetir 4
+      Informar(1)
+      RecibirMensaje(quien,*)
+      si(quien = 1)
+        RecibirMensaje(aux,r1)
+        cantR:= cantR + aux
+      sino
+        si(quien = 2)
+          RecibirMensaje(aux,r2)
+          cantR:=cantR + aux
+        sino
+          si(quien = 3)
+            RecibirMensaje(aux,a1)
+            cantA:=cantA + aux
+          sino
+            RecibirMensaje(aux,a2)
+            cantA:=cantA + aux
+    si(cantA > cantR)
+      Informar('ganadorEquipoAzul', 0)
+    sino
+      Informar('ganadorEquipoRojo', 0)
+  fin
+variables
+  r1: rojo
+  r2: rojo
+  a1: azul
+  a2: azul
+  rf: jefe
+comenzar
+  AsignarArea(r1, area1)
+  AsignarArea(r2, area2)
+  AsignarArea(a1, area3)
+  AsignarArea(a2, area4)
+  AsignarArea(rf, areaJ)
+  Iniciar(rf, 1,1)
+  Iniciar(r1, 2,1)
+  Iniciar(r2, 3,1)
+  Iniciar(a1, 1,98)
+  Iniciar(a2, 1,99)
+fin

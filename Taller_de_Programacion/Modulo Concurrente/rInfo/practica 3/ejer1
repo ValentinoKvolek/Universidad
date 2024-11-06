@@ -1,0 +1,92 @@
+programa ejer1prac3
+procesos
+  proceso recorrerAvenidaF(E x: numero; E y: numero)
+  variables
+    c,a: numero
+  comenzar
+    repetir 5
+      Random(a,1,5)
+      Random(c,1,10)
+      BloquearEsquina(a,c)
+      Pos(a,c)
+      si(HayFlorEnLaEsquina)
+        mientras(HayFlorEnLaEsquina)
+          tomarFlor
+      Pos(x,y)
+      LiberarEsquina(a,c)
+    BloquearEsquina(10,10)
+    Pos(10,10)
+    mientras(HayFlorEnLaBolsa)
+      depositarFlor  
+    Pos(x,y)
+    LiberarEsquina(10,10)    
+  fin
+  proceso recorrerAvenidaP(E x: numero; E y: numero)
+  variables
+    c,a: numero
+  comenzar
+    repetir 5
+      Random(a,6,10)
+      Random(c,1,9)
+      BloquearEsquina(a,c)
+      Pos(a,c)
+      si(HayPapelEnLaEsquina)
+        mientras(HayPapelEnLaEsquina)
+          tomarPapel
+      Pos(x,y)
+      LiberarEsquina(a,c)
+    BloquearEsquina(10,10)
+    Pos(10,10)
+    mientras(HayPapelEnLaBolsa)
+      depositarPapel  
+    Pos(x,y)
+    LiberarEsquina(10,10)    
+  fin
+areas
+  areaFlores: AreaPC(1,1,5,10)
+  areaPapeles: AreaPC(6,1,10,9)
+  area1 : AreaP(6, 10, 6, 10)
+  area2 : AreaP(7, 10, 7, 10)
+  area3 : AreaP(8, 10, 8, 10)
+  area4 : AreaP(9, 10, 9, 10)
+  areaFin: AreaC(10,10,10,10) 
+robots
+  robot floreros
+  variables
+    AvI, CaI : numero
+  comenzar
+    AvI:=PosAv
+    CaI:=PosCa
+    recorrerAvenidaF(AvI,CaI)
+  fin
+  robot papeleros
+  variables
+    AvI, CaI : numero
+  comenzar
+    AvI:=PosAv
+    CaI:=PosCa
+    recorrerAvenidaP(AvI, CaI)
+  fin
+variables
+  r1: floreros
+  r2: floreros
+  r3: papeleros
+  r4: papeleros
+comenzar
+  AsignarArea(r1, areaFlores)
+  AsignarArea(r1, area1)
+  AsignarArea(r1, areaFin)
+  AsignarArea(r2, areaFlores)
+  AsignarArea(r2, area2)
+  AsignarArea(r2, areaFin)
+  AsignarArea(r3, areaPapeles)
+  AsignarArea(r3, area3)
+  AsignarArea(r3, areaFin)
+  AsignarArea(r4, areaPapeles)
+  AsignarArea(r4, area4)
+  AsignarArea(r4, areaFin)
+  Iniciar(r1, 6,10)
+  Iniciar(r2, 7,10)
+  Iniciar(r3, 8,10)
+  Iniciar(r4, 9,10)
+fin

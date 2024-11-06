@@ -1,0 +1,105 @@
+programa ejer5
+procesos
+  proceso asignarR
+  comenzar
+    EnviarMensaje(1,r1)
+    EnviarMensaje(2,r2)
+    EnviarMensaje(3,r3)
+    EnviarMensaje(4,r4)
+  fin
+  proceso recorrer(E a:numero; E c:numero; E quien:numero)
+  variables
+    ok:boolean
+    aux:boolean
+    contador:numero
+  comenzar
+    ok:=V
+    contador:=0
+    aux:=V
+    mientras(ok & aux)
+      contador:=contador +1
+      si (contador = 99)
+        aux:=F
+      BloquearEsquina(11,11)
+      Pos(11,11)
+      si(HayPapelEnLaEsquina)
+        tomarPapel
+      sino
+        ok:=F
+      Pos(a,c)
+      LiberarEsquina(11,11)
+      si(HayPapelEnLaBolsa)
+        depositarPapel
+      c:=c+1
+      Pos(a,c)
+    EnviarMensaje(quien,r5)
+    EnviarMensaje(contador,r5)
+  fin
+  proceso compararMax(E t:numero; ES max:numero; E quien:numero ES rmax:numero)
+  comenzar
+    si(t > max)
+      max:=t
+      rmax:=quien
+  fin
+areas
+  area1: AreaP(4,1,4,100)
+  area2: AreaP(6,1,6,100)
+  area3: AreaP(8,1,8,100)
+  area4: AreaP(10,1,10,100)
+  areaV:AreaC(11,11,11,11)
+  area5: AreaP(1,1,1,1)
+robots
+  robot corredor
+  variables
+    quien,a,c:numero
+  comenzar
+    a:=PosAv
+    c:=PosCa
+    RecibirMensaje(quien,r5)
+    recorrer(a,c,quien)
+  fin
+  robot coordinador
+  variables
+    quien,t,max,rmax:numero
+  comenzar
+    max:=-1
+    rmax:=1
+    asignarR
+    repetir 4
+      RecibirMensaje(quien,*)
+      si(quien = 1)
+        RecibirMensaje(t,r1)
+      sino
+        si(quien = 2)
+          RecibirMensaje(t,r2)
+        sino
+          si(quien = 3)
+            RecibirMensaje(t,r3)
+          sino
+            RecibirMensaje(t,r4)
+      compararMax(t,max,quien,rmax)
+    Informar(rmax)
+  fin
+variables
+  r1: corredor
+  r2: corredor
+  r3: corredor
+  r4: corredor
+  r5: coordinador
+comenzar
+  AsignarArea(r1, area1)
+  AsignarArea(r1, areaV)
+  AsignarArea(r2, area2)
+  AsignarArea(r2, areaV)
+  AsignarArea(r3, area3)
+  AsignarArea(r3, areaV)
+  AsignarArea(r4, area4)
+  AsignarArea(r4, areaV)
+  AsignarArea(r5, areaV)
+  AsignarArea(r5, area5)
+  Iniciar(r1, 4,1)
+  Iniciar(r2, 6,1)
+  Iniciar(r3, 8,1)
+  Iniciar(r4, 10,1)
+  Iniciar(r5, 1,1)
+fin
