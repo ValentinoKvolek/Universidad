@@ -1,0 +1,14 @@
+practica 2  ejer 1: 
+
+a) El programa lo que hace es multiplicar 5 veces 5 
+
+b) Lo que hace la instruccion jal es funcionar como un salto a la subrutina potencia, y se guarda el punto de retorno en el registo r31($ra) y el jr lo que hace es 
+Volver con la posicion de retorno r31
+
+c) el valor que se almacena es el valor de retorno para seguir con el programa principal, los registros ao y a1 son los registros que por conveccion de los programa
+dores se usar para pasar datos a la subrutina, y el v0 es para retornar valores de la subrutina por eso guarda el resultado de la multiplicacion en ese registro.
+los valores posibles que pueden recibir, puede recibir numeros.
+
+d) lo que pasaria en ese caso seria que tendria dos direcciones de retorno y tendria que asegurarme de guarda la primera para poder Volver. lo saben por que cada vez que saltan tienen su direccion en el registro r31.
+
+

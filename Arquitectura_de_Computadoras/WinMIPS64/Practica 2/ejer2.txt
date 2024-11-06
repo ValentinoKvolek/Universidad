@@ -1,0 +1,6 @@
+ejer2 a) en este programa los registros que estan mal son los t ya que son registro temporales y lo que nosotros
+necesitamos para este caso son registro a ya que van a enviarse a una subrutina.
+
+b) en este programa el problema qes que no se esta usando el registro v para traer valores de la subrutina
+
+c) el problema del programa es que usa a0 en la dmul cuando no sabes si pudo haber cambiado el valor, lo ideal es antes de mandarlo a la subrutina guardarlo en un registro S

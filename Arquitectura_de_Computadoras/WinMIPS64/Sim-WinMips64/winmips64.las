@@ -1,0 +1,1 @@
+C:\Users\valen\OneDrive\Desktop\UNIVERSIDAD\ARQUITECTURA\WinMIPS64\Practica 2\ejer3.s
