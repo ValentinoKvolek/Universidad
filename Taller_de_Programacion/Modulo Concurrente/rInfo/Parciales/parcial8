@@ -1,0 +1,102 @@
+programa ejemplo
+procesos
+  proceso asignarID
+  comenzar
+    EnviarMensaje(1,r1)
+    EnviarMensaje(2,r2)
+    EnviarMensaje(3,r3)
+  fin
+  proceso posicionar(E id:numero)
+  comenzar
+    si(id = 1)
+      Pos(5,1)
+    sino
+      si(id =2)
+        Pos(6,1)
+      sino
+        Pos(7,1)
+  fin
+  proceso dosmax(E t:numero; E id:numero ES max1:numero; ES max2:numero; ES id1:numero; ES id2:numero)
+  comenzar
+    si(t>max1)
+      max2:=max1
+      id2:=id1
+      max1:=t
+      id1:=id
+    sino
+      si(t>max2)
+        max2:=t
+        id2:=id
+  fin
+areas
+  area1: AreaP (5,1,5,10)
+  area2: AreaP (6,1,6,10)
+  area3: AreaP (7,1,7,10)
+  areaJ: AreaP (1,1,1,1)
+robots
+  robot jefe
+  variables
+    id,t,max1,max2,id1,id2,idG,idB:numero
+  comenzar
+    max1:=-1
+    max2:=-1
+    id1:=0
+    id2:=0
+    asignarID
+    repetir 3
+      RecibirMensaje(id,*)
+      si(id=1)
+        RecibirMensaje(t,r1)
+      sino
+        si(id = 2)
+          RecibirMensaje(t,r2)
+        sino
+          RecibirMensaje(t,r3)
+      dosmax(t,id,max1,max2,id1,id2)
+    EnviarMensaje(id1,r1)
+    EnviarMensaje(id2,r1)
+    EnviarMensaje(id1,r2)
+    EnviarMensaje(id2,r2)
+    EnviarMensaje(id1,r3)
+    EnviarMensaje(id2,r3)
+    RecibirMensaje(idG,*)
+    RecibirMensaje(idB,*) 
+    Informar(idG)    
+  fin
+  robot juntador
+  variables
+    id,cant,gano1,gano2:numero
+  comenzar
+    RecibirMensaje(id,rj)
+    repetir 9
+      mientras(HayFlorEnLaEsquina)
+        tomarFlor
+        cant:=cant+1
+      mover
+    EnviarMensaje(id,rj)
+    EnviarMensaje(cant,rj)
+    RecibirMensaje(gano1,rj)
+    RecibirMensaje(gano2,rj) 
+    si( (gano1 = id) | (gano2 = id) )
+      posicionar(id)
+      repetir 9 
+        mientras(HayPapelEnLaEsquina)
+          tomarPapel
+        mover
+      EnviarMensaje(id,rj)
+  fin
+variables
+  r1: juntador
+  r2: juntador
+  r3: juntador
+  rj: jefe
+comenzar
+  AsignarArea(r1, area1)
+  AsignarArea(r2, area2)
+  AsignarArea(r3, area3)
+  AsignarArea(rj, areaJ)
+  Iniciar(r1, 5,1) 
+  Iniciar(r2, 6,1) 
+  Iniciar(r3, 7,1) 
+  Iniciar(rj, 1,1) 
+fin

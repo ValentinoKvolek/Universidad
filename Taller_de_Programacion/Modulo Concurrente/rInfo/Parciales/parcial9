@@ -1,0 +1,109 @@
+programa parcial9
+procesos
+  proceso asignarID
+  comenzar
+    EnviarMensaje(1,r1)
+    EnviarMensaje(2,r2)
+  fin
+  proceso dejarFlores(E id:numero ES cantf:numero; ES cantp:numero; E a:numero; E c:numero)
+  comenzar
+    mientras ((cantf<>0)|(cantp<>0))
+      BloquearEsquina(21,21)
+      Pos(21,21)
+      si(HayFlorEnLaBolsa)
+        depositarFlor
+        cantf:=cantf-1
+      si(HayPapelEnLaBolsa)
+        depositarPapel
+        cantp:=cantp-1
+      Pos(a,c)
+      LiberarEsquina(21,21)
+  fin
+areas
+  area1: AreaP (1,1,20,20)
+  area2: AreaP (21,1,40,20)
+  areaJ: AreaP (23,23,23,23)
+  zonaF: AreaPC(21,21,21,21)
+  zonaP: AreaPC(22,22,22,22)
+robots
+  robot trabajador
+  variables
+    id,al,ac,a,c,cantp,cantf:numero
+  comenzar
+    cantp:=0
+    cantf:=0
+    RecibirMensaje(id,rj)
+    RecibirMensaje(al,rj)
+    RecibirMensaje(ac,rj)
+    repetir 2
+      repetir al
+        mientras(HayFlorEnLaEsquina)
+          tomarFlor
+          cantf:=cantf+1
+        mientras(HayPapelEnLaEsquina)
+          tomarPapel
+          cantp:=cantp+1
+        mover
+      EnviarMensaje(id,rj)
+      EnviarMensaje(cantf,rj)
+      a:=PosAv
+      c:=PosCa
+      dejarFlores(id,cantf,cantp,a,c)
+      derecha
+      repetir ac
+        mientras(HayFlorEnLaEsquina)
+          tomarFlor
+          cantf:=cantf+1
+        mientras(HayPapelEnLaEsquina)
+          tomarPapel
+          cantp:=cantp+1
+        mover
+      EnviarMensaje(id,rj)
+      EnviarMensaje(cantf,rj)
+      a:=PosAv
+      c:=PosCa
+      dejarFlores(id,cantf,cantp,a,c)
+      derecha
+  fin
+  robot jefe
+  variables
+    id,alto,ancho,t1,t2,t:numero
+  comenzar
+    asignarID
+    Random(alto,1,19)
+    Random(ancho,1,19)
+    EnviarMensaje(alto,r1)
+    EnviarMensaje(ancho,r1)
+    Random(alto,1,19)
+    Random(ancho,1,19)
+    EnviarMensaje(alto,r2)
+    EnviarMensaje(ancho,r2)
+    repetir 8
+      RecibirMensaje(id,*)
+      si(id = 1)
+        RecibirMensaje(t,r1)
+        t1:=t1+t
+      sino
+        RecibirMensaje(t,r2)
+        t2:=t2+t
+    si(t1>t2)
+      Informar(1)
+    sino
+      Informar(2)
+  fin
+variables
+  r1:trabajador
+  r2:trabajador
+  rj:jefe
+comenzar
+  AsignarArea(r1, area1)
+  AsignarArea(r1, zonaF)
+  AsignarArea(r1, zonaP)
+  AsignarArea(r2, area2)
+  AsignarArea(r2, zonaF)
+  AsignarArea(r2, zonaP)
+  AsignarArea(rj, areaJ)
+  Iniciar(r1, 1,1)
+  Iniciar(r2, 21,1)
+  Iniciar(rj, 23,23)
+fin
