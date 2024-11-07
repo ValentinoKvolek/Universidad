@@ -1,0 +1,119 @@
+programa parcial14
+procesos
+  proceso asignarID
+  comenzar
+    EnviarMensaje(1,r1)
+    EnviarMensaje(2,r2)
+    EnviarMensaje(3,r3)
+  fin
+  proceso hacerLado(ES cant:numero)
+  comenzar
+    repetir 5
+      mientras(HayFlorEnLaEsquina)
+        tomarFlor
+        cant:=cant+1
+      mover
+    derecha
+  fin
+  proceso comenzarEtapa
+  comenzar
+    EnviarMensaje(V,r1)
+    EnviarMensaje(V,r2)
+    EnviarMensaje(V,r3)
+  fin
+  proceso finalizarEtapa
+  comenzar
+    EnviarMensaje(F,r1)
+    EnviarMensaje(F,r2)
+    EnviarMensaje(F,r3)
+  fin
+  proceso calcularMax(E t:numero E id:numero; ES maxr:numero ES max:numero)
+  comenzar
+    si(t>max)
+      max:=t
+      maxr:=id
+  fin
+areas
+  area1: AreaP (1,1,6,6)
+  area2: AreaP (7,1,12,6)
+  area3: AreaP (13,1,18,6)
+  areaJ: AreaP (20,1,20,1)
+  areaT: AreaPC(10,10,10,10)
+robots
+  robot trabajador
+  variables
+    id,cant,idaux,a,c:numero
+    ok:boolean
+  comenzar
+    cant:=0
+    ok:=V
+    RecibirMensaje(id,rj)
+    mientras(ok)
+      RecibirMensaje(ok,rj)
+      si(ok =V)
+        hacerLado(cant)
+        EnviarMensaje(V,rj)
+    EnviarMensaje(id,rj)
+    EnviarMensaje(cant,rj)
+    RecibirMensaje(idaux,rj)
+    si(idaux <> id)
+      a:=PosAv
+      c:=PosCa
+      mientras(cant <>0)
+        BloquearEsquina(10,10)
+        Pos(10,10)
+        si(HayFlorEnLaEsquina)
+          depositarFlor
+        Pos(a,c)
+        LiberarEsquina(10,10)
+        cant:= cant-1      
+  fin
+  robot jefe
+  variables 
+    id,t,maxr,max:numero
+    ok:boolean
+  comenzar
+    t:=0
+    maxr:=0
+    max:=0
+    asignarID
+    repetir 4
+      comenzarEtapa
+      repetir 3
+        RecibirMensaje(ok,*)
+    finalizarEtapa
+    repetir 3
+      RecibirMensaje(id,*)
+      si(id=1)
+        RecibirMensaje(t,r1)
+        calcularMax(t,id,maxr,max)
+      sino
+        si(id=2)
+          RecibirMensaje(t,r2)
+          calcularMax(t,id,maxr,max)
+        sino
+          RecibirMensaje(t,r3)
+          calcularMax(t,id,maxr,max)
+    EnviarMensaje(maxr, r1)
+    EnviarMensaje(maxr, r2)
+    EnviarMensaje(maxr, r3)
+    Informar('ELROBOTGANADOR',maxr)
+  fin
+variables
+  r1: trabajador
+  r2: trabajador
+  r3: trabajador
+  rj: jefe
+comenzar
+  AsignarArea(r1, area1)
+  AsignarArea(r1, areaT)
+  AsignarArea(r2, area2)
+  AsignarArea(r2, areaT)
+  AsignarArea(r3, area3)
+  AsignarArea(r3, areaT)
+  AsignarArea(rj, areaJ)
+  Iniciar(r1, 1,1)
+  Iniciar(r2, 7,1)
+  Iniciar(r3, 13,1)
+  Iniciar(rj, 20,1)
+fin
