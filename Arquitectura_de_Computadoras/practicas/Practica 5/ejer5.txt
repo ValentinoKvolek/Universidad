@@ -1,0 +1,4 @@
+ejer 5 a) si bien el programa funciona el registro que esta mal utilizado seria el $s0, ya que no me interesa
+y tampoco me importa lo que pase con ese numero, asi que hay que usar un temporal.
+
+b) lo que esta mal es que esta usando un registro temporal para una informacion la cual es necesario que se guarde en un regustro V ya que es un valor de retorno de una subrutina

@@ -1,0 +1,120 @@
+programa ejemplo
+procesos
+  proceso asignarID
+  comenzar
+    EnviarMensaje(1,r1)
+    EnviarMensaje(2,r2)
+    EnviarMensaje(3,r3)
+  fin
+  proceso hacerRectangulo(E al:numero; E an:numero; ES cant:numero )
+  variables
+    a,c:numero
+  comenzar
+    repetir 2
+      repetir al
+        mientras(HayFlorEnLaEsquina)
+          tomarFlor
+          cant:=cant+1
+        mover
+      a:=PosAv
+      c:=PosCa
+      BloquearEsquina(25,25)
+      Pos(25,25)
+      mientras(HayFlorEnLaBolsa)
+        depositarFlor
+      Pos(a,c)
+      LiberarEsquina(25,25)
+      derecha
+      repetir an
+        mientras(HayFlorEnLaEsquina)  
+          tomarFlor
+          cant:=cant+1
+        mover
+      a:=PosAv
+      c:=PosCa
+      BloquearEsquina(25,25)
+      Pos(25,25)
+      mientras(HayFlorEnLaBolsa)
+        depositarFlor
+      Pos(a,c)
+      LiberarEsquina(25,25)
+      derecha
+  fin
+  proceso calcularMax(E id:numero; E t:numero; ES max:numero; ES maxr:numero)
+  comenzar
+    si(t>max)
+      max:=t
+      maxr:=id
+  fin
+areas
+  area1: AreaP (1,1,6,11)
+  area2: AreaP (7,1,12,11)
+  area3: AreaP (13,1,18,11)
+  areaT: AreaPC(25,25,25,25)
+  areaJ: AreaP(24,24,24,24)
+robots
+  robot jefe
+  variables
+    id,al,an,max,maxr,t:numero
+  comenzar
+    max:=-1
+    asignarID
+    repetir 3
+      Random(al,1,10)
+      Random(an,1,5)
+      RecibirMensaje(id,*)
+      si(id = 1)
+        EnviarMensaje(al,r1)
+        EnviarMensaje(an,r1)
+      sino
+        si(id = 2)
+          EnviarMensaje(al,r2)
+          EnviarMensaje(an,r2)
+        sino
+          EnviarMensaje(al,r3)
+          EnviarMensaje(an,r3)  
+    repetir 3
+      RecibirMensaje(id,*)
+      si(id=1)
+        RecibirMensaje(t,r1)
+        calcularMax(id,t,max,maxr)
+      sino
+        si(id=2)
+          RecibirMensaje(t,r2)
+          calcularMax(id,t,max,maxr)
+        sino
+          RecibirMensaje(t,r3)
+          calcularMax(id,t,max,maxr)
+    Informar(maxr)          
+  fin
+  robot juntador
+  variables
+    id,cant,al,an:numero
+  comenzar
+    RecibirMensaje(id,rj)
+    EnviarMensaje(id,rj)
+    RecibirMensaje(al,rj)
+    RecibirMensaje(an,rj)
+    hacerRectangulo(al,an,cant)
+    EnviarMensaje(id,rj)
+    Informar(cant)
+    EnviarMensaje(cant,rj)
+  fin
+variables
+  r1: juntador
+  r2: juntador
+  r3: juntador
+  rj: jefe
+comenzar
+  AsignarArea(r1, area1)
+  AsignarArea(r1, areaT)
+  AsignarArea(r2, area2)
+  AsignarArea(r2, areaT)
+  AsignarArea(r3, area3)
+  AsignarArea(r3, areaT)
+  AsignarArea(rj, areaJ)
+  Iniciar(r1, 1,1)
+  Iniciar(r2, 7,1)
+  Iniciar(r3, 13,1)
+  Iniciar(rj, 24,24)
+fin
