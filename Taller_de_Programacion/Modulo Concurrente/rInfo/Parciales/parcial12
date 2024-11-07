@@ -1,0 +1,122 @@
+programa ejemplo
+procesos
+  proceso asignarID
+  comenzar
+    EnviarMensaje(1,a1)
+    EnviarMensaje(2,v1)
+    EnviarMensaje(3,a2)
+    EnviarMensaje(4,v2)
+  fin
+  proceso juntarFlores(ES cant:numero)
+  comenzar
+    mientras(HayFlorEnLaEsquina)
+      tomarFlor
+      cant:=cant+1
+  fin
+  proceso juntarPapeles(ES cant:numero)
+  comenzar
+    mientras(HayPapelEnLaEsquina)
+      tomarPapel
+      cant:=cant+1
+  fin
+  proceso bloqueoF(E a:numero; E c:numero; ES cant:numero)
+  comenzar
+    a:=a+5
+    BloquearEsquina(a,c)
+    mover
+    juntarFlores(cant)
+    mover
+    LiberarEsquina(a,c)
+    mover
+  fin
+  proceso bloqueoP(E a:numero; E c:numero; ES cant:numero)
+  comenzar
+    c:=c+8
+    BloquearEsquina(a,c)
+    mover
+    juntarPapeles(cant)
+    mover
+    LiberarEsquina(a,c)
+  fin
+areas
+  eazul: AreaPC (2,4,12,24)
+  everde: AreaPC (16,4,26,24)
+  areaJ: AreaP (1,1,1,1)
+robots
+  robot juntador
+  variables
+    id,cant,a,c:numero
+  comenzar
+    a:=PosAv
+    c:=PosCa
+    cant:=0
+    RecibirMensaje(id,rj)
+    si((id = 1) | (id = 2))
+      derecha
+      repetir 4
+        juntarFlores(cant)
+        mover
+      juntarFlores(cant)
+      bloqueoF(a,c,cant)
+      repetir 3
+        juntarFlores(cant)
+        mover
+    sino
+      repetir 7
+        juntarPapeles(cant)
+        mover 
+      juntarPapeles(cant)
+      bloqueoP(a,c,cant)
+      juntarPapeles(cant)
+      mover
+      juntarPapeles(cant)
+    EnviarMensaje(id,rj)
+    EnviarMensaje(cant,rj)
+  fin
+  robot jefe
+  variables
+    id,azul,verde,aux:numero
+  comenzar
+    azul:=0
+    verde:=0
+    asignarID
+    repetir 4
+      RecibirMensaje(id,*)
+      si(id = 1)
+        RecibirMensaje(aux,a1)
+        azul:=azul+aux
+      sino
+        si(id = 2)
+          RecibirMensaje(aux,v1)
+          verde:=verde+aux
+        sino
+          si(id = 3)
+            RecibirMensaje(aux,a2)
+            azul:=azul+aux
+          sino
+            si(id = 4)
+              RecibirMensaje(aux,v2)
+              verde:=verde+aux
+    si(azul>verde)
+      Informar('ganadorAzul',azul)
+    sino
+      Informar('ganadorVerde',verde)    
+  fin
+variables
+  a1:juntador
+  v1:juntador
+  a2:juntador
+  v2:juntador
+  rj:jefe
+comenzar
+  AsignarArea(a1, eazul)
+  AsignarArea(v1, everde)
+  AsignarArea(a2, eazul)
+  AsignarArea(v2, everde)
+  AsignarArea(rj, areaJ)
+  Iniciar(a1, 2,12)
+  Iniciar(v1, 16,12)
+  Iniciar(a2, 7,4)
+  Iniciar(v2, 21,4)
+  Iniciar(rj, 1,1)
+fin
