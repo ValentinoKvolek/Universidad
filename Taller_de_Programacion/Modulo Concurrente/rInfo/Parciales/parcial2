@@ -7,32 +7,33 @@ procesos
     EnviarMensaje(3, r3)
     EnviarMensaje(4, r4)
   fin
-  proceso juntarFlor(ES cantF:numero; ES cantFaux:numero)
+  proceso juntarFlor(ES cantF:numero)
   comenzar
     mientras(HayFlorEnLaEsquina)
       tomarFlor
       cantF:=cantF+1
-      cantFaux:=cantFaux+1
   fin
-  proceso hacerLado(ES cantF:numero; ES cantFaux:numero)
+  proceso hacerLado(ES cantF:numero)
   comenzar
     repetir 9
-      juntarFlor(cantF,cantFaux)
+      juntarFlor(cantF)
       mover
-    juntarFlor(cantF,cantFaux)
+    juntarFlor(cantF)
   fin
-  proceso dejarFlores(E cantFaux:numero)
+  proceso dejarFlores(E cantF:numero)
   variables
     a,c:numero
   comenzar
     a:=PosAv
     c:=PosCa 
-    BloquearEsquina(20,20)
-    Pos(20,20)
-    repetir cantFaux
-      depositarFlor
-    Pos(a,c)
-    LiberarEsquina(20,20)
+    mientras(cantF>0)
+      BloquearEsquina(20,20)
+      Pos(20,20)
+      si(HayFlorEnLaBolsa)
+        depositarFlor
+      Pos(a,c)
+      LiberarEsquina(20,20)
+      cantF:=cantF-1
   fin
 areas
   area1: AreaPC (1,1,11,10)
@@ -42,39 +43,40 @@ areas
 robots
   robot primerTanda
   variables
-    cantF,cantFaux,id,a,c:numero
+    cantF,id,a,c:numero
   comenzar
-    cantFaux:=0
     cantF:=0
     RecibirMensaje(id,rf)
-    hacerLado(cantF,cantFaux)
+    hacerLado(cantF)
     derecha
-    hacerLado(cantF,cantFaux)
+    hacerLado(cantF)
     si(id = 1)
       EnviarMensaje(V,r2)
       EnviarMensaje(cantF,r2)
     sino
       EnviarMensaje(V,r4)
       EnviarMensaje(cantF,r4)
-    dejarFlores(cantFaux)
+    dejarFlores(cantF)
   fin
   robot segundaTanda
   variables
     ok:boolean
-    cantF,id,cantFaux:numero
+    total,cantF,id,cantFaux:numero
   comenzar
-    cantFaux:=0
     RecibirMensaje(id,rf)
     RecibirMensaje(ok,*)
     RecibirMensaje(cantF, *)
+    total:=total+cantF
+    cantF:=0
     repetir 2
       derecha
-    hacerLado(cantF,cantFaux)
+    hacerLado(cantF)
     derecha
-    hacerLado(cantF,cantFaux)
-    dejarFlores(cantFaux)
+    hacerLado(cantF)
+    total:=total+cantF
+    dejarFlores(cantF)
     EnviarMensaje(id,rf)
-    EnviarMensaje(cantF,rf) 
+    EnviarMensaje(total,rf) 
   fin
   robot jefe
   variables

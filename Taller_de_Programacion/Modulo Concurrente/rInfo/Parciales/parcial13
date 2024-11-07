@@ -1,0 +1,103 @@
+programa ejemplo
+procesos
+  proceso recorrerAvenida(E numAv: numero)
+  comenzar
+    Pos(numAv, 1)
+    repetir 99
+      mover
+  fin
+areas
+  areaF: AreaP(100,100,100,100)
+  areaT: AreaPC(1,1,61,61)
+robots
+  robot florero1
+  variables
+    id,cant,cont,c:numero
+  comenzar
+    cont:=1
+    RecibirMensaje(id,rf)
+    RecibirMensaje(c,rf)
+    cant:=0
+    repetir 58
+      mientras(HayFlorEnLaEsquina)
+        tomarFlor
+        cant:=cant+1
+      mover
+      cont:=cont+1
+      si(cont+1 = c)
+        BloquearEsquina(6,c)
+        EnviarMensaje(id,rf)
+        mover
+        mientras(HayFlorEnLaEsquina)
+          tomarFlor
+          cant:=cant+1
+        mover
+        LiberarEsquina(6,c) 
+    EnviarMensaje(id,rf)
+    EnviarMensaje(cant,rf)
+  fin
+  robot florero2
+  variables
+    id,c,cant:numero
+  comenzar
+    cant:=0
+    RecibirMensaje(id,rf)
+    RecibirMensaje(c,rf)
+    Pos(1,c)
+    derecha
+    repetir 4
+      mientras(HayFlorEnLaEsquina)
+        tomarFlor
+        cant:=cant+1
+      mover
+    BloquearEsquina(6,c)
+    EnviarMensaje(id,rf)
+    mover
+    mientras(HayFlorEnLaEsquina)
+      tomarFlor
+      cant:=cant+1
+    mover
+    LiberarEsquina(6,c)
+    repetir 54
+      mientras(HayFlorEnLaEsquina)
+        tomarFlor
+        cant:=cant+1
+      mover
+    EnviarMensaje(id,rf)
+    EnviarMensaje(cant,rf)
+  fin
+  robot fiscalizador
+  variables
+    id,c,t1,t2,auxg,auxp:numero
+  comenzar
+    EnviarMensaje(1,r1)
+    EnviarMensaje(2,r2)
+    Random(c,2,50)
+    EnviarMensaje(c,r1)
+    EnviarMensaje(c,r2)
+    RecibirMensaje(auxg,*)
+    RecibirMensaje(auxp,*)
+    repetir 2
+      RecibirMensaje(id,*)
+      si(id=1)
+        RecibirMensaje(t1,r1)
+      sino
+        RecibirMensaje(t2,r2)
+    si(t1>t2)
+      Informar('ganadorF1',t1)
+    sino
+      Informar('ganadorF2',t2)
+    Informar(auxg)
+  fin
+variables
+  r1:florero1
+  r2:florero2
+  rf:fiscalizador
+comenzar
+  AsignarArea(r1, areaT)
+  AsignarArea(r2, areaT)
+  AsignarArea(rf, areaF)
+  Iniciar(r1, 6,1)
+  Iniciar(r2, 1,2)
+  Iniciar(rf, 100,100)
+fin

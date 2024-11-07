@@ -19,24 +19,28 @@ procesos
       tomarPapel
       cant:=cant+1
   fin
-  proceso bloqueoF(E a:numero; E c:numero; ES cant:numero)
+  proceso bloqueoF(E id:numero; ES cant:numero)
   comenzar
-    a:=a+5
-    BloquearEsquina(a,c)
-    mover
-    juntarFlores(cant)
-    mover
-    LiberarEsquina(a,c)
-    mover
+    si(id=1)
+      BloquearEsquina(7,12)
+      mover
+      juntarFlores(cant)
+      mover
+      LiberarEsquina(7,12)
+    sino
+      BloquearEsquina(21,12)
+      mover
+      juntarFlores(cant)
+      mover
+      LiberarEsquina(21,12)
   fin
-  proceso bloqueoP(E a:numero; E c:numero; ES cant:numero)
+  proceso bloqueoP(E a:numero; ES cant:numero)
   comenzar
-    c:=c+8
-    BloquearEsquina(a,c)
+    BloquearEsquina(a,12)
     mover
     juntarPapeles(cant)
     mover
-    LiberarEsquina(a,c)
+    LiberarEsquina(a,12)
   fin
 areas
   eazul: AreaPC (2,4,12,24)
@@ -45,20 +49,18 @@ areas
 robots
   robot juntador
   variables
-    id,cant,a,c:numero
-  comenzar
-    a:=PosAv
-    c:=PosCa
+    id,cant,a:numero
+  comenzar  
     cant:=0
     RecibirMensaje(id,rj)
-    si((id = 1) | (id = 2))
+    si(id = 1) | (id = 2)
       derecha
       repetir 4
         juntarFlores(cant)
         mover
       juntarFlores(cant)
-      bloqueoF(a,c,cant)
-      repetir 3
+      bloqueoF(id,cant)
+      repetir 4
         juntarFlores(cant)
         mover
     sino
@@ -66,10 +68,11 @@ robots
         juntarPapeles(cant)
         mover 
       juntarPapeles(cant)
-      bloqueoP(a,c,cant)
-      juntarPapeles(cant)
-      mover
-      juntarPapeles(cant)
+      a:=PosAv
+      bloqueoP(a,cant)
+      repetir 11
+        juntarPapeles(cant)
+        mover
     EnviarMensaje(id,rj)
     EnviarMensaje(cant,rj)
   fin

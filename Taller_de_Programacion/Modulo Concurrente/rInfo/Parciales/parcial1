@@ -15,14 +15,14 @@ procesos
     si(HayFlorEnLaEsquina)
       tomarFlor
       cont:=cont+1
-    BloquearEsquina(1,6)
-    Pos(1,6)
-    repetir cont
+    mientras(cont > 0)
+      BloquearEsquina(1,6)
+      Pos(1,6)
       si(HayFlorEnLaBolsa)
         depositarFlor
-    Pos(a,c)
-    LiberarEsquina(1,6)
-
+      Pos(a,c)
+      LiberarEsquina(1,6)
+      cont:=cont-1
   fin
   proceso etapa2(E id:numero)
   variables
@@ -36,13 +36,14 @@ procesos
         tomarPapel
         cont:=cont+1
       mover
-    BloquearEsquina(1,6)
-    Pos(1,6)
-    repetir cont
+    mientras(cont>0)
+      BloquearEsquina(1,6)
+      Pos(1,6)
       si(HayPapelEnLaBolsa)
         depositarPapel
-    posicionarse(id)
-    LiberarEsquina(1,6)
+      posicionarse(id)
+      LiberarEsquina(1,6)
+      cont:=cont-1
   fin
   proceso posicionarse(E id:numero)
   comenzar
