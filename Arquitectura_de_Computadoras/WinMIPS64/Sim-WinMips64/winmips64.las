@@ -1,1 +1,1 @@
-C:\Users\valen\OneDrive\Desktop\UNIVERSIDAD\Arquitectura_de_Computadoras\practicas\practica 5\ejer4c.s
+C:\Users\valen\OneDrive\Desktop\UNIVERSIDAD\Arquitectura_de_Computadoras\practicas\practica 5\ejer9.s
