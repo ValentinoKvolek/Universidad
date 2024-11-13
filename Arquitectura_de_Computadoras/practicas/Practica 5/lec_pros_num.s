@@ -5,6 +5,7 @@ CONTROL: .word 0x10000
 DATA: .word 0x10008
 
 men: .asciiz "Debe ingresar un numero"
+men2: .asciiz "la cantida de impares fue : "
 
 a: .byte 0
 
@@ -38,6 +39,11 @@ j lazito
 
 fin2:
 
+    daddi $a0, $0, tabla # pongo en a0 la direccion de tabla
+
+    dadd $a1,$0,$s2 # en a1 esta mi longitud(cantidad de elemento a contar) 
+
+    jal PROCESAR_NUMEROS 
 
 halt
 
@@ -66,31 +72,68 @@ lazo:
 
     j lazo
 
-    imprimir: 
-
-        sd $a0,0($s1) #guardo lo que me dio en data
-        
-        daddi $t2, $zero, 2 # para impimer numero
-        sd $t2,0($s0) #control == 2
+    imprimir:
 
         daddi $v0,$a0,0 
         ld $ra, 0($sp)
         daddi $sp,$sp,8
-
 jr $ra
 
 # a0 = num, a1:= 0, a2 = 10.
 # B<N<A = 1 si no  0
 ENTRE:
-
     slt $t0, $a1, $a0 # Si B<N
     beqz $t0,fin
     slt $t0,$a0,$a2  #si N<A 
     beqz $t0,fin
-
     fin: dadd $v0,$0,$t0  #t0 puede ser 1 0 0 dependiendo n
+    jr $ra
+
+#a0 la direccion de TABLA
+#a1 recibe la cantidad de elementos a contar
+
+PROCESAR_NUMEROS: 
+    daddi $t0, $0,0 # desplamiento
+    daddi $t5,$0,0 # contador
+    daddi $sp,$sp,-8
+    sd $ra, 0($sp) # me guardo la direccion de retorno
+
+bucle:
+    beqz $a1, fin3
+    dadd $t1,$t0,$a0 #sumando la ubicacion de la tabla mas el indice para desplazarme
+    lb $a2,0($t1) #pongo el numero a2
+    daddi $a1,$a1,-1
+    daddi $t0,$t0,1
+    jal ES_IMPAR
+    dadd $t5,$t5,$v0 
+par:
+    j bucle
+
+fin3:
+
+    daddi $t2, $zero , men2
+    sd $t2, 0 ($s1)
+    daddi $t2, $zero, 4
+    sd $t2, 0($s0)
+
+    dadd $t2,$0,$t5
+    sd $t2,0($s1) # pongo el numero en data
+    daddi $t2,$0,2
+    sd $t2,0($s0) #control == 2
+
+    ld $ra, 0($sp) 
+    daddi $sp,$sp,8
 
     jr $ra
+
+ES_IMPAR: 
+
+    andi $v0,$a2,1
+
+    jr $ra
+
+
+
 
 
 
