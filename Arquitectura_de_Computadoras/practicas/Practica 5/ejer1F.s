@@ -12,9 +12,9 @@ aux2: .word 0
 
 .code
 
-    ld $s0, CONTROL($zero) #guardo control en t0
+    ld $s0, CONTROL($zero) #guardo control en s0
 
-    ld $s1, DATA($zero) #guardo data en t1
+    ld $s1, DATA($zero) #guardo data en s1
 
     ld $a0, base1($zero) #guardo lo que esta en base en a0
 
