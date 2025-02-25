@@ -9,6 +9,9 @@
 tabla: .byte 1,5,10,2,5
 tabla2: .byte 1,2,11,3,5
 
+
+vectoryoni: .byte 3,4,5,6,10,40,12
+
 verde: .byte 0,255,0,0
 azul: .byte 0,0,255,0
 
