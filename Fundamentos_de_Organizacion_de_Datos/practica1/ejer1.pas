@@ -13,16 +13,16 @@ type
 var 
     arc_logico:archivo; // variable que define el nombre logico del archivo
     nro:  integer; 
-    arc_fisico: string[12]; // nombre fisico del archivo.
+    arc_fisico: String; // nombre fisico del archivo.
 
 begin
-    write ('ingrese nombre del archivo');
+    writeln('ingrese nombre del archivo ');
     read(arc_fisico);
     assign(arc_logico, arc_fisico);
-    rewrite(arc_logico); // se crea el archivo.
+    rewrite(arc_logico); // se crea el archivo.B
     write ('Ingrese un numero:');
     readln(nro);
-    while(nro <> 3000) do begin 
+    while(nro <> 30000) do begin 
         write( arc_logico, nro ); // escribo el archivo.
         write ('Ingrese un numero:');
         readln(nro);
