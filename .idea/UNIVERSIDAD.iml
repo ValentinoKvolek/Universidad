@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="EMPTY_MODULE" version="4">
+  <component name="NewModuleRootManager">
+    <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/Rust/practicas 2023/1/ejer7/ejer7/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Rust/practicas 2023/1/ejer7/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Rust/practicas 2023/1/ejer8/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Rust/practicas 2023/1/ejer10/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Rust/practicas 2023/1/ejer11/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Rust/practicas 2023/1/ejer12/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Rust/practicas 2023/1/ejer9/src" isTestSource="false" />
+      <excludeFolder url="file://$MODULE_DIR$/Rust/practicas 2023/1/ejer7/ejer7/target" />
+      <excludeFolder url="file://$MODULE_DIR$/Rust/practicas 2023/1/ejer7/target" />
+      <excludeFolder url="file://$MODULE_DIR$/Rust/practicas 2023/1/ejer8/target" />
+      <excludeFolder url="file://$MODULE_DIR$/Rust/practicas 2023/1/ejer10/target" />
+      <excludeFolder url="file://$MODULE_DIR$/Rust/practicas 2023/1/ejer11/target" />
+      <excludeFolder url="file://$MODULE_DIR$/Rust/practicas 2023/1/ejer12/target" />
+      <excludeFolder url="file://$MODULE_DIR$/Rust/practicas 2023/1/ejer9/target" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+  </component>
+</module>
