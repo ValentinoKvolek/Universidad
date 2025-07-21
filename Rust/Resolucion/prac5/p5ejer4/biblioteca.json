@@ -1,0 +1,59 @@
+{
+  "path": "D:/Universidad/Rust/Resolucion/prac5/p5ejer4/",
+  "nombre": "Biblio Unlp",
+  "direccion": "Av 50",
+  "copia_libros": {
+    "222": 0,
+    "111": 2
+  },
+  "prestamos": [
+    {
+      "libro": {
+        "isnb": 111,
+        "titulo": "El Principe",
+        "autor": "Nicolas Maquiavelo",
+        "numero_paginas": 300,
+        "genero": "Novela",
+        "cant_copia": 3
+      },
+      "cliente": {
+        "dni": 4909834,
+        "nombre": "Valentino",
+        "telefono": "123456",
+        "direccion": "Calle falsa 123",
+        "correo": "valen@gmail.com"
+      },
+      "fecha_vencimiento": {
+        "dia": 25,
+        "mes": 6,
+        "anio": 2025
+      },
+      "fecha_devolucion": null,
+      "estado": "Prestado"
+    },
+    {
+      "libro": {
+        "isnb": 222,
+        "titulo": "Otro libro",
+        "autor": "Autor",
+        "numero_paginas": 200,
+        "genero": "Novela",
+        "cant_copia": 1
+      },
+      "cliente": {
+        "dni": 4909834,
+        "nombre": "Valentino",
+        "telefono": "123456",
+        "direccion": "Calle falsa 123",
+        "correo": "valen@gmail.com"
+      },
+      "fecha_vencimiento": {
+        "dia": 1,
+        "mes": 7,
+        "anio": 2025
+      },
+      "fecha_devolucion": null,
+      "estado": "Prestado"
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+[package]
+name = "prac3"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+serde = { version = "1.0.219", features = ["derive"] }
+serde_json = "1.0.140"
+
+[[bin]]
+path = "src/ejer1/main.rs"
+name = "ej1"
+
+[[bin]]
+path = "src/ejer2/main.rs"
+name = "ej2"
+
+[[bin]]
+path = "src/ejer3/main.rs"
+name = "ej3"
+
+[[bin]]
+path = "src/ejer4/main.rs"
+name = "ej4"
+
+[[bin]]
+path = "src/ejer5/main.rs"
+name = "ej5"
+
+[[bin]]
+path = "src/ejer6/main.rs"
+name = "ej6"
+
+[[bin]]
+path = "src/ejer7/main.rs"
+name = "ej7"

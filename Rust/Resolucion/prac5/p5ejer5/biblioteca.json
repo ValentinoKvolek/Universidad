@@ -1,0 +1,60 @@
+{
+  "1": {
+    "id_usuario": 1,
+    "suscripcion": "Cancelada",
+    "datos": {
+      "costo_mensual": 10.0,
+      "duracion": {
+        "dia": 1,
+        "mes": 1,
+        "anio": 2025
+      },
+      "fecha_inicio": {
+        "dia": 1,
+        "mes": 2,
+        "anio": 2025
+      },
+      "medio_pago": "Efectivo"
+    }
+  },
+  "2": {
+    "id_usuario": 2,
+    "suscripcion": "Cancelada",
+    "datos": {
+      "costo_mensual": 10.0,
+      "duracion": {
+        "dia": 1,
+        "mes": 1,
+        "anio": 2025
+      },
+      "fecha_inicio": {
+        "dia": 1,
+        "mes": 2,
+        "anio": 2025
+      },
+      "medio_pago": {
+        "Tarjeta": 123456
+      }
+    }
+  },
+  "3": {
+    "id_usuario": 3,
+    "suscripcion": "Classic",
+    "datos": {
+      "costo_mensual": 10.0,
+      "duracion": {
+        "dia": 1,
+        "mes": 1,
+        "anio": 2025
+      },
+      "fecha_inicio": {
+        "dia": 1,
+        "mes": 2,
+        "anio": 2025
+      },
+      "medio_pago": {
+        "Transferencia": 789456
+      }
+    }
+  }
+}

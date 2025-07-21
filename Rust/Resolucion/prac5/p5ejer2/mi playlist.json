@@ -1,0 +1,10 @@
+{
+  "titulo_playlist": "mi playlist",
+  "canciones": [
+    {
+      "titulo": "Bohemian Rhapsody",
+      "artista": "Queen",
+      "genero": "Rock"
+    }
+  ]
+}

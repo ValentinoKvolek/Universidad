@@ -1,0 +1,54 @@
+[package]
+name = "prac1"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+
+[[bin]]
+path = "src/ejer1/main.rs"
+name = "ej1"
+
+[[bin]]
+path = "src/ejer2/main.rs"
+name = "ej2"
+
+[[bin]]
+path = "src/ejer3/main.rs"
+name = "ej3"
+
+[[bin]]
+path = "src/ejer4/main.rs"
+name = "ej4"
+
+[[bin]]
+path = "src/ejer5/main.rs"
+name = "ej5"
+
+[[bin]]
+path = "src/ejer6/main.rs"
+name = "ej6"
+
+[[bin]]
+path = "src/ejer7/main.rs"
+name = "ej7"
+
+[[bin]]
+path = "src/ejer8/main.rs"
+name = "ej8"
+
+[[bin]]
+path = "src/ejer9/main.rs"
+name = "ej9"
+
+[[bin]]
+path = "src/ejer10/main.rs"
+name = "ej10"
+
+[[bin]]
+path = "src/ejer11/main.rs"
+name = "ej11"
+
+[[bin]]
+path = "src/ejer12/main.rs"
+name = "ej12"

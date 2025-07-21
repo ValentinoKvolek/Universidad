@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="EMPTY_MODULE" version="4">
+  <component name="NewModuleRootManager">
+    <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/practicas 2025/1/ejer10/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/practicas 2025/2/ejer1/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/practicas 2025/2/ejer2/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/practicas 2025/2/ejer3/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/practicas 2025/2/ejer4/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/practicas 2025/2/ejer5/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/practicas 2025/2/ejer6/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/practicas 2025/2/ejer10/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/practicas 2025/2/ejer11/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/practicas 2025/2/ejer12/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/practicas 2025/2/ejer13/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/practicas 2025/2/ejer14/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/practicas 2025/2/ejer7/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/practicas 2025/2/ejer8/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/practicas 2025/2/ejer9/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Resolucion/3/ejer1/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Resolucion/3/ejer2/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Resolucion/3/ejer3/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Resolucion/3/ejer4/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Resolucion/3/ejer5/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Resolucion/3/ejer6/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Resolucion/3/ejer7/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Resolucion/3/ejer8/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Resolucion/3/ejer9/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Resolucion/3/ejer10/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Resolucion/2/ejer1/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Resolucion/2/ejer10/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Resolucion/2/ejer11/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Resolucion/2/ejer12/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Resolucion/2/ejer13/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Resolucion/2/ejer14/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Resolucion/2/ejer3/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Resolucion/2/ejer4/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Resolucion/2/ejer5/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Resolucion/2/ejer6/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Resolucion/2/ejer7/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Resolucion/2/ejer8/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Resolucion/2/ejer9/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Resolucion/4/ejer1/main/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Resolucion/4/ejer1/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Resolucion/4/tp4_main/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Resolucion/prac1/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Resolucion/prac2/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Resolucion/prac3/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Resolucion/prac4/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Resolucion/prac5/p5ejer1/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Resolucion/prac5/p5ejer2/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Resolucion/prac5/p5ejer3/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Resolucion/prac5/p5ejer4/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Resolucion/prac5/p5ejer5/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Resolucion/prac5/p5ejer6/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Resolucion/entregable/src" isTestSource="false" />
+      <excludeFolder url="file://$MODULE_DIR$/practicas 2025/1/ejer10/target" />
+      <excludeFolder url="file://$MODULE_DIR$/practicas 2025/2/ejer1/target" />
+      <excludeFolder url="file://$MODULE_DIR$/practicas 2025/2/ejer2/target" />
+      <excludeFolder url="file://$MODULE_DIR$/practicas 2025/2/ejer3/target" />
+      <excludeFolder url="file://$MODULE_DIR$/practicas 2025/2/ejer4/target" />
+      <excludeFolder url="file://$MODULE_DIR$/practicas 2025/2/ejer5/target" />
+      <excludeFolder url="file://$MODULE_DIR$/practicas 2025/2/ejer6/target" />
+      <excludeFolder url="file://$MODULE_DIR$/practicas 2025/2/ejer10/target" />
+      <excludeFolder url="file://$MODULE_DIR$/practicas 2025/2/ejer11/target" />
+      <excludeFolder url="file://$MODULE_DIR$/practicas 2025/2/ejer12/target" />
+      <excludeFolder url="file://$MODULE_DIR$/practicas 2025/2/ejer13/target" />
+      <excludeFolder url="file://$MODULE_DIR$/practicas 2025/2/ejer14/target" />
+      <excludeFolder url="file://$MODULE_DIR$/practicas 2025/2/ejer7/target" />
+      <excludeFolder url="file://$MODULE_DIR$/practicas 2025/2/ejer8/target" />
+      <excludeFolder url="file://$MODULE_DIR$/practicas 2025/2/ejer9/target" />
+      <excludeFolder url="file://$MODULE_DIR$/Resolucion/3/ejer1/target" />
+      <excludeFolder url="file://$MODULE_DIR$/Resolucion/3/ejer2/target" />
+      <excludeFolder url="file://$MODULE_DIR$/Resolucion/3/ejer3/target" />
+      <excludeFolder url="file://$MODULE_DIR$/Resolucion/3/ejer4/target" />
+      <excludeFolder url="file://$MODULE_DIR$/Resolucion/3/ejer5/target" />
+      <excludeFolder url="file://$MODULE_DIR$/Resolucion/3/ejer6/target" />
+      <excludeFolder url="file://$MODULE_DIR$/Resolucion/3/ejer7/target" />
+      <excludeFolder url="file://$MODULE_DIR$/Resolucion/3/ejer8/target" />
+      <excludeFolder url="file://$MODULE_DIR$/Resolucion/3/ejer9/target" />
+      <excludeFolder url="file://$MODULE_DIR$/Resolucion/3/ejer10/target" />
+      <excludeFolder url="file://$MODULE_DIR$/Resolucion/2/ejer1/target" />
+      <excludeFolder url="file://$MODULE_DIR$/Resolucion/2/ejer10/target" />
+      <excludeFolder url="file://$MODULE_DIR$/Resolucion/2/ejer11/target" />
+      <excludeFolder url="file://$MODULE_DIR$/Resolucion/2/ejer12/target" />
+      <excludeFolder url="file://$MODULE_DIR$/Resolucion/2/ejer13/target" />
+      <excludeFolder url="file://$MODULE_DIR$/Resolucion/2/ejer14/target" />
+      <excludeFolder url="file://$MODULE_DIR$/Resolucion/2/ejer3/target" />
+      <excludeFolder url="file://$MODULE_DIR$/Resolucion/2/ejer4/target" />
+      <excludeFolder url="file://$MODULE_DIR$/Resolucion/2/ejer5/target" />
+      <excludeFolder url="file://$MODULE_DIR$/Resolucion/2/ejer6/target" />
+      <excludeFolder url="file://$MODULE_DIR$/Resolucion/2/ejer7/target" />
+      <excludeFolder url="file://$MODULE_DIR$/Resolucion/2/ejer8/target" />
+      <excludeFolder url="file://$MODULE_DIR$/Resolucion/2/ejer9/target" />
+      <excludeFolder url="file://$MODULE_DIR$/Resolucion/4/ejer1/main/target" />
+      <excludeFolder url="file://$MODULE_DIR$/Resolucion/4/ejer1/target" />
+      <excludeFolder url="file://$MODULE_DIR$/Resolucion/4/tp4_main/target" />
+      <excludeFolder url="file://$MODULE_DIR$/Resolucion/prac1/target" />
+      <excludeFolder url="file://$MODULE_DIR$/Resolucion/prac2/target" />
+      <excludeFolder url="file://$MODULE_DIR$/Resolucion/prac3/target" />
+      <excludeFolder url="file://$MODULE_DIR$/Resolucion/prac4/target" />
+      <excludeFolder url="file://$MODULE_DIR$/Resolucion/prac5/p5ejer1/target" />
+      <excludeFolder url="file://$MODULE_DIR$/Resolucion/prac5/p5ejer2/target" />
+      <excludeFolder url="file://$MODULE_DIR$/Resolucion/prac5/p5ejer3/target" />
+      <excludeFolder url="file://$MODULE_DIR$/Resolucion/prac5/p5ejer4/target" />
+      <excludeFolder url="file://$MODULE_DIR$/Resolucion/prac5/p5ejer5/target" />
+      <excludeFolder url="file://$MODULE_DIR$/Resolucion/prac5/p5ejer6/target" />
+      <excludeFolder url="file://$MODULE_DIR$/Resolucion/entregable/target" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+  </component>
+</module>

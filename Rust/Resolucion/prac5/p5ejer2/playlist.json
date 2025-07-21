@@ -1,0 +1,17 @@
+[
+  {
+    "titulo": "cancion 1",
+    "artista": "artista 1",
+    "genero": "Pop"
+  },
+  {
+    "titulo": "cancion 2",
+    "artista": "artista 2",
+    "genero": "Rock"
+  },
+  {
+    "titulo": "cancion 3",
+    "artista": "artista 3",
+    "genero": "Jazz"
+  }
+]

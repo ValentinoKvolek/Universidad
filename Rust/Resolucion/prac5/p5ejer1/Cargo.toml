@@ -1,0 +1,13 @@
+[package]
+name = "p5ejer1"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+error_proc_macro = "0.1.0"
+serde = {version = "1.0.219", features = ["derive"]} 
+serde_json = "1.0.140"
+
+
+
+

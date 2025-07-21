@@ -1,0 +1,28 @@
+[package]
+name = "prac4"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+log = "0.4.27"
+rand = "0.9.1"
+
+[[bin]]
+path = "src/ejer1/main.rs"
+name = "ej1"
+
+[[bin]]
+path = "src/ejer2/main.rs"
+name = "ej2"
+
+[[bin]]
+path = "src/ejer3/main.rs"
+name = "ej3"
+
+[[bin]]
+path = "src/ejer4/main.rs"
+name = "ej4"
+
+[[bin]]
+path = "src/ejer5/main.rs"
+name = "ej5"
