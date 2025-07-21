@@ -1,0 +1,6 @@
+123 1500.00           hola
+10 11           
+iphone 15
+321 600.00           chau
+70 3           
+samsung s21

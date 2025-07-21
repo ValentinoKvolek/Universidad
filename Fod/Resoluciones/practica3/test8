@@ -1,0 +1,54 @@
+program crear_archivo_distribuciones;
+
+type
+    distribucion = record
+        nombre: string;
+        anioLanzamiento: integer;
+        numKernel: real;
+        cantDesarrolladores: integer;
+        descripcion: string;
+    end;
+
+    fileMaestro = file of distribucion;
+
+var
+    mae: fileMaestro;
+    reg: distribucion;
+
+begin
+    assign(mae, 'arch_distribuciones');
+    rewrite(mae);
+
+    // Escribimos cabecera con cantDesarrolladores = 0, indicando que no hay registros libres aún
+    reg.nombre := '';
+    reg.anioLanzamiento := 0;
+    reg.numKernel := 0.0;
+    reg.cantDesarrolladores := 0; // lista invertida vacía
+    reg.descripcion := '';
+    write(mae, reg);
+
+    // Agregamos algunos registros de ejemplo
+    reg.nombre := 'Ubuntu';
+    reg.anioLanzamiento := 2004;
+    reg.numKernel := 5.15;
+    reg.cantDesarrolladores := 1500;
+    reg.descripcion := 'Distribución basada en Debian, mantenida por Canonical.';
+    write(mae, reg);
+
+    reg.nombre := 'Fedora';
+    reg.anioLanzamiento := 2003;
+    reg.numKernel := 6.1;
+    reg.cantDesarrolladores := 1200;
+    reg.descripcion := 'Distribución comunitaria patrocinada por Red Hat.';
+    write(mae, reg);
+
+    reg.nombre := 'Arch';
+    reg.anioLanzamiento := 2002;
+    reg.numKernel := 6.2;
+    reg.cantDesarrolladores := 800;
+    reg.descripcion := 'Distribución minimalista y rolling release.';
+    write(mae, reg);
+
+    close(mae);
+    writeln('Archivo creado con éxito.');
+end.

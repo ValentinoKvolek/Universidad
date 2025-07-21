@@ -1,0 +1,85 @@
+program test_ejer6_prac3;
+uses crt;
+
+const
+    VALOR_ALTO = 999;
+
+type 
+    prenda = record
+        cod_prenda: integer;
+        descripcion: string;
+        colores: string;
+        tipo_prenda: string;
+        stock: integer;
+        precio_unitario: real;
+    end;
+
+    delete = record
+        cod_prenda: integer;
+    end;
+
+    fileDelete = file of delete;
+    filePrenda = file of prenda;
+
+procedure crearArchivoPrendas(var fp: filePrenda);
+var
+    regP: prenda;
+begin
+    assign(fp, 'archivoPrendas');
+    rewrite(fp);
+    
+    regP.cod_prenda := 1;
+    regP.descripcion := 'Camisa';
+    regP.colores := 'Blanco';
+    regP.tipo_prenda := 'Formal';
+    regP.stock := 10;
+    regP.precio_unitario := 50.0;
+    write(fp, regP);
+    
+    regP.cod_prenda := 2;
+    regP.descripcion := 'Pantalon';
+    regP.colores := 'Negro';
+    regP.tipo_prenda := 'Casual';
+    regP.stock := 15;
+    regP.precio_unitario := 70.0;
+    write(fp, regP);
+    
+    regP.cod_prenda := 3;
+    regP.descripcion := 'Chaqueta';
+    regP.colores := 'Azul';
+    regP.tipo_prenda := 'Deportiva';
+    regP.stock := 5;
+    regP.precio_unitario := 100.0;
+    write(fp, regP);
+    
+    close(fp);
+end;
+
+procedure crearArchivoEliminados(var fd: fileDelete);
+var
+    regD: delete;
+begin
+    assign(fd, 'archivoPrendasEliminadas');
+    rewrite(fd);
+    
+    regD.cod_prenda := 2;
+    write(fd, regD);
+    
+    regD.cod_prenda := 4; // Código no existente
+    write(fd, regD);
+    
+    close(fd);
+end;
+
+var
+    fp: filePrenda;
+    fd: fileDelete;
+
+begin
+    clrscr;
+    
+    crearArchivoPrendas(fp);
+    crearArchivoEliminados(fd);
+    
+    writeln('Archivos de prueba creados: archivoPrendas y archivoPrendasEliminadas');
+end.

@@ -1,0 +1,6 @@
+36.00 -76 Producto1 Descripcion del producto 1
+96.00 -70 Producto2 Descripcion del producto 2
+100.00 -142 Producto3 Descripcion del producto 3
+77.00 -109 Producto4 Descripcion del producto 4
+61.00 -96 Producto5 Descripcion del producto 5
+30.00 -108 Product

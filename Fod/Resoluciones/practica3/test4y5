@@ -1,0 +1,26 @@
+program inicializarArchivoFlores;
+
+type
+    reg_flor = record
+        nombre: string[45];
+        code: integer;
+    end;
+
+    tArchFlores = file of reg_flor;
+
+var
+    fl: tArchFlores;
+    cabecera: reg_flor;
+
+begin
+    assign(fl, 'floresFile');
+    rewrite(fl);  // crea archivo nuevo o lo sobreescribe
+
+    // Inicializo cabecera
+    cabecera.code := 0;
+    cabecera.nombre := '';
+    write(fl, cabecera); // registro 0 = cabecera
+
+    close(fl);
+    writeln('Archivo "floresFile" inicializado con cabecera.');
+end.
