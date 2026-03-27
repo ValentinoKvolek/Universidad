@@ -1,0 +1,28 @@
+@startuml
+skinparam packageStyle rectangle
+skinparam classAttributeIconSize 0
+skinparam stereotypeFontColor #555555
+skinparam stereotypeCBackgroundColor #F2F2F2
+skinparam stereotypeCBorderColor #BBBBBB
+
+package " Grafos " {
+
+    class Farola{
+
+        estado: Boolean
+        vecinos:List<Farola>
+        +crearFarola():Farola
+        +pairWithNeighbor( Farola otraFarola ):void
+        +getNeighbors () : List<farola>
+        +turnOn():void
+        +turnOff():void
+        +isOn():boolean
+        +isOff():boolean
+    }
+     ' Autoasociación
+        Farola "0..*" --  Farola : vecinas
+
+
+}
+
+@enduml

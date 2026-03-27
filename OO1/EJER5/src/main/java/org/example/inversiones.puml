@@ -1,0 +1,45 @@
+@startumlS
+skinparam packageStyle rectangle
+skinparam classAttributeIconSize 0
+skinparam stereotypeFontColor #555555
+skinparam stereotypeCBackgroundColor #F2F2F2
+skinparam stereotypeCBorderColor #BBBBBB
+package "Inversores" {
+  abstract class Inversion {
+    + getValorActual(): decimal
+  }
+
+  class InversionAccion {
+    + getValorActual(): decimal
+  }
+
+  class InversionPlazoFijo {
+    fechaConstitucion: Date
+    montoInicial: decimal
+    tasaInteresDiaria: double
+    + getValorActual(): decimal
+  }
+
+  class Accion {
+    + nombre: String
+    + valorUnitarioActual: decimal
+  }
+
+  class Inversor {
+    + nombre: String
+    --
+    - Inversiones: List<Inversion>
+    + agregar(inversion: Inversion):void
+    + quitar(inversion: Inversion):void
+    +getValorActualCartera():decimal
+
+  }
+
+  Inversion <|-- InversionAccion
+  Inversion <|-- InversionPlazoFijo
+
+  Inversor "1" o-- "0..*" Inversion : composición\n«posee/contiene»
+  InversionAccion "0"--> "n" Accion : acciones
+}
+
+@enduml

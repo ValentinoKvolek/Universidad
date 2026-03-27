@@ -1,0 +1,62 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+class Empresa {
+    +agregarEnvio(c:Cliente, e:Envio): void
+    +montoAPagar(c:Cliente, inicio:LocalDate, fin:LocalDate): double
+}
+
+abstract class Envio {
+    -fecha : LocalDate
+    -origen : String
+    -destino : String
+    -peso : double
+    -entregaRapida : boolean
+    +estaEnElPeriodo(inicio:LocalDate, fin:LocalDate): boolean
+    +costoEnvio(): double
+}
+
+class EnvioLocal {
+    +costoEnvio(): double
+}
+
+class EnvioInterurbano {
+    -distancia : Integer
+    +costoEnvio(): double
+}
+
+class EnvioInternacional {
+    +costoEnvio(): double
+}
+
+abstract class Cliente {
+    -envios : List<Envio>
+    +agregarUnEnvio(envio:Envio): void
+    +calcularMontoEnUnPeriodo(inicio:LocalDate, fin:LocalDate): double
+    #aplicarDescuento(total:double): double
+}
+
+class PersonaFisica {
+    -nombre : String
+    -direccion : String
+    -dni : Integer
+    +aplicarDescuento(total:double): double
+}
+
+class ClienteCorporativo {
+    -nombreEmpresa : String
+    -direccion : String
+    -cuit : Integer
+    +aplicarDescuento(total:double): double
+}
+
+Empresa "1" o-- "0..*" Cliente : clientes
+Cliente "1" *-- "0..*" Envio : envíos
+
+EnvioLocal --|> Envio
+EnvioInterurbano --|> Envio
+EnvioInternacional --|> Envio
+
+PersonaFisica --|> Cliente
+ClienteCorporativo --|> Cliente
+@enduml

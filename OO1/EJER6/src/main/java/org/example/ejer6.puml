@@ -1,0 +1,58 @@
+    @startuml
+    skinparam packageStyle rectangle
+    skinparam classAttributeIconSize 0
+    skinparam stereotypeFontColor #555555
+    skinparam stereotypeCBackgroundColor #F2F2F2
+    skinparam stereotypeCBorderColor #BBBBBB
+
+    package "Distruibudora Eletrica" {
+
+  class Usuario {
+
+    nombre: String
+    domicilio: String
+    consumos: List<Consumo>,
+    + registrarConsumo(c: Consumo): void
+    + obtenerUltimoConsumo(): Consumo
+
+    }
+
+  class Consumo {
+
+    fecha: Date
+    energiaActivaKWh: double     ' kWh (paga)
+    energiaReactivaKvarh: double ' kVArh (solo para bonificación)
+    + getFecha(): Date
+    + getEnergiaActiva(): double
+    + getEnergiaReactiva(): double
+    + calcularFPE(): double
+
+    }
+
+      class CuadroTarifario {
+
+        - precioKWh: double
+        + getPrecioKWh(): double
+        + actualizarPrecio(nuevo: double): void
+    }
+
+  class Factura {
+
+    -usuario: Usuario
+    -fechaEmision: Date
+    -consumo: Consumo,
+    -bonificacionPorc: double     ' 0.10 si FPE > 0.8, sino 0
+    -bonificacionMonto: double
+    -montoFinal: double
+    + getMontoFinal(): double
+    + getBonificacionMonto(): double
+
+    }
+Factura --> Usuario
+Usuario --> Consumo
+Consumo ..> CuadroTarifario
+
+}
+
+@enduml
+

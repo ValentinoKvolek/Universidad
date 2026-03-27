@@ -1,0 +1,63 @@
+@startumlS
+skinparam packageStyle rectangle
+skinparam classAttributeIconSize 0
+skinparam stereotypeFontColor #555555
+skinparam stereotypeCBackgroundColor #F2F2F2
+skinparam stereotypeCBorderColor #BBBBBB
+package "Alquileres" {
+
+    class Usuario{
+        -nombre:String
+        -Direccion:String
+        -Dni:integer
+        -Propiedades:List<Propiedades>
+        +CrearReserva(LocalDate fechaI, LocalDate fechaF , List<Propiedades>propiedad):boolean
+        +CancelarReserva(Propiedad propiedad, Reserva reserva):void;
+        +IngresosTotales(DateLapde periodo):double
+    }
+
+    class Propiedad{
+        -direccion:String
+        -nombreDescriptivo:String
+        -precioPorNoche:Double
+        -reserva:List<Reserva>
+        +estaDisponible(LocalDate desde, LocalDate hasta):boolean
+        +crearReserva(LocalDate desde, LocalDate hasta):boolean
+        +cancelarReserva(Reserva reserva):void
+        +calcularIngresoEnPeriodo(DateLapde periodo):double
+        +getReservas():List<Reserva>
+    }
+
+    class Reserva {
+        -Periodo: DateLapde periodo
+        +noSeSuperpone(LocalDate otroDesde, LocalDate otroHasta):boolean
+        +calcularPrecio(double precioPorNoche): double
+        +getPeriodo():DateLapse
+        +yaComenzo():Boolean
+        +estaDentroDePeriodo(DateLapde periodoConsulta): boolean
+    }
+
+    class DateLapde{
+        from:LocalDate
+        sizeInDays:integer
+        +sizeInDays():int
+        +getFrom:LocalDate
+        +getTo():LocalDate
+        +includesDate(LocalDate other):boolean
+        +overlaps(DateLapde otroPeriodo):boolean
+    }
+
+
+    Usuario --> Propiedad :0..*
+
+    Usuario --> Reserva :0..*
+
+    Propiedad --> Reserva :0..*
+
+    Reserva --> DateLapde :1..1
+
+
+
+}
+
+@enduml

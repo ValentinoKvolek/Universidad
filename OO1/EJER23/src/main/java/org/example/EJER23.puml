@@ -1,0 +1,40 @@
+@startuml
+
+
+
+abstract class Usuario {
+   -nombre:String
+   -direccion:String
+   -estadoCuenta:Boolean
+}
+
+
+class Viaje{
+    -costoTotal:double
+    -Origen:String
+    -Destino:String
+    -FechaSalida:LocalDate
+}
+
+class Vehiculo{
+    -viajes: List<Viaje>
+    -descripcion:String
+    -capacidad:Int
+    -añoFa:int
+}
+
+class Conductor{
+    -vehiculo:Vehiculo
+}
+
+class Pasajero{
+}
+Conductor --|> Usuario
+Pasajero --|> Usuario
+
+Conductor "1" --* "1..*" Vehiculo
+Vehiculo "1" --* "0..*" Viaje
+Viaje "1" --> "1" Conductor
+Viaje "0..*" -- "0..*" Pasajero
+
+@enduml

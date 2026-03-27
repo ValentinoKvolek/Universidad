@@ -1,0 +1,5 @@
+Explique brevemente cómo propone utilizar las clases investigadas anteriormente para implementar su solución. Por ejemplo:
+“Se debe subclasificar una determinada clase y redefinir un método para que haga lo siguiente”
+“Se debe crear una nueva clase que contenga un objeto de un determinado tipo al cual se le delegará está responsabilidad”
+
+Se debe subclasificar HashSet<Integer> y redefinir el método add() para que solo agregue números pares, delegando la operación al método super.add() cuando corresponda.

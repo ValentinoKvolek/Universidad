@@ -1,0 +1,54 @@
+@startumlS
+
+class Cliente {
+  -nombre:String
+  -fechaAlta:LocalDate
+  -plan:Plan
+  -actividades:List<Actividad>
+
+  +montoTotalActividades(FechaI,FechaF)
+  +montoPenalizacion(FechaI,FechaF)
+  +MontoTotal(FechaI,FechaF)
+
+}
+
+interface Plan{
+    +calcularPrecioBase():Double
+}
+
+class PlanIndividual implements Plan{
+   -cantMinutosContratados:Integer
+    +calcularPrecioBase():Double
+}
+class PlanGrupal implements Plan{
+   -cantMaxIps:Integer
+    +calcularPrecioBase():Double
+}
+
+abstract class Actividad{
+     -fechaInicio:LocalDate
+     -ip:String
+     +calcularMontoActividad():Double
+}
+class ReproduccionVideo extends Actividad{
+    -duracionTotal:Integer
+    -duracionPublicidad:integer
+}
+class SesionDeJuego extends Actividad{
+    -duracion:Integer
+    -items:List<Item>
+}
+
+class Item{
+    -nombre:String
+    -cantidad:Integer
+    -precioUnitario:Double
+}
+
+
+Cliente "1" *-- "1" Plan
+Cliente "1" *-- "0..*" Actividad
+SesionDeJuego "1" *-- "0..*" Item
+
+
+@enduml
