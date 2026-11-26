@@ -80,12 +80,9 @@ export default function AlgorithmLab() {
         </div>
       </div>
 
-      {/* Main Interactive Stage */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-        {/* Left Col: Visual Canvas & Step Controls (7 cols) */}
-        <div className="lg:col-span-7 space-y-4">
-          <div className="bg-slate-900 border border-slate-800 rounded-2xl p-5 shadow-lg">
-            <div className="flex items-center justify-between pb-4 border-b border-slate-800">
+      {/* Visual Canvas (Full Width Stage) */}
+      <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl space-y-5">
+        <div className="flex items-center justify-between pb-4 border-b border-slate-800">
               <div>
                 <h3 className="font-bold text-base text-white flex items-center gap-2">
                   <Sparkles className="w-4 h-4 text-amber-400" />
@@ -510,68 +507,72 @@ export default function AlgorithmLab() {
             </div>
           </div>
 
-          {/* Docente Advice Callout */}
-          <div className="bg-slate-900 border border-slate-800 rounded-xl p-4 flex gap-3 text-slate-300 text-sm">
-            <AlertTriangle className="w-5 h-5 text-amber-400 shrink-0 mt-0.5" />
-            <div>
-              <strong className="text-amber-300 block mb-0.5 font-semibold">
-                Criterio de Corrección UNLP:
-              </strong>
-              {algo.complexity.docenteNote}
+          {/* Bottom Grid: Pascal Code & Exam Analysis (2 Columns) */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+            {/* Left Col: Pascal Code with synchronized line highlighting (7 cols) */}
+            <div className="lg:col-span-7 space-y-4">
+              <div className="bg-slate-900 border border-slate-800 rounded-2xl p-5 shadow-lg flex flex-col h-full">
+                <div className="flex items-center justify-between pb-3 border-b border-slate-800 mb-3">
+                  <span className="text-xs font-mono font-bold text-slate-400 uppercase tracking-wider flex items-center gap-2">
+                    <Code2 className="w-4 h-4 text-blue-400" /> Código Pascal Canónico
+                  </span>
+                  <span className="text-[11px] font-mono text-slate-400">
+                    {algo.category}
+                  </span>
+                </div>
+
+                {/* Code lines */}
+                <div className="bg-slate-950 border border-slate-800/80 rounded-xl p-4 font-mono text-xs overflow-x-auto flex-1 leading-relaxed max-h-[460px]">
+                  {algo.pascalCode.split('\n').map((line, idx) => {
+                    const lineNum = idx + 1;
+                    const isCurrent = step.activeLine === lineNum;
+
+                    return (
+                      <div
+                        key={idx}
+                        className={`flex items-start gap-3 py-0.5 px-2 -mx-2 rounded transition-colors ${
+                          isCurrent
+                            ? 'bg-amber-500/20 text-amber-200 border-l-2 border-amber-400 font-semibold'
+                            : 'text-slate-300 hover:bg-slate-900/60'
+                        }`}
+                      >
+                        <span className="text-slate-600 select-none w-6 text-right shrink-0">
+                          {lineNum}
+                        </span>
+                        <span className="whitespace-pre">{line}</span>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
 
-        {/* Right Col: Pascal Code with synchronized line highlighting (5 cols) */}
-        <div className="lg:col-span-5 space-y-4">
-          <div className="bg-slate-900 border border-slate-800 rounded-2xl p-5 shadow-lg flex flex-col h-full">
-            <div className="flex items-center justify-between pb-3 border-b border-slate-800 mb-3">
-              <span className="text-xs font-mono font-bold text-slate-400 uppercase tracking-wider flex items-center gap-2">
-                <Code2 className="w-4 h-4 text-blue-400" /> Código Pascal Canónico
-              </span>
-              <span className="text-[11px] font-mono text-slate-400">
-                {algo.category}
-              </span>
-            </div>
+            {/* Right Col: Docente Advice & Complexity (5 cols) */}
+            <div className="lg:col-span-5 space-y-4">
+              {/* Docente Advice Callout */}
+              <div className="bg-slate-900 border border-slate-800 rounded-2xl p-5 shadow-lg text-slate-300">
+                <div className="flex items-center gap-2.5 text-amber-300 mb-3 font-semibold text-sm">
+                  <AlertTriangle className="w-5 h-5 text-amber-400 shrink-0" />
+                  <span>Criterio de Corrección UNLP</span>
+                </div>
+                <p className="text-sm leading-relaxed text-slate-300 bg-slate-950/70 p-4 rounded-xl border border-slate-800/80">
+                  {algo.complexity.docenteNote}
+                </p>
 
-            {/* Code lines */}
-            <div className="bg-slate-950 border border-slate-800/80 rounded-xl p-4 font-mono text-xs overflow-x-auto flex-1 leading-relaxed">
-              {algo.pascalCode.split('\n').map((line, idx) => {
-                const lineNum = idx + 1;
-                const isCurrent = step.activeLine === lineNum;
-
-                return (
-                  <div
-                    key={idx}
-                    className={`flex items-start gap-3 py-0.5 px-2 -mx-2 rounded transition-colors ${
-                      isCurrent
-                        ? 'bg-amber-500/20 text-amber-200 border-l-2 border-amber-400 font-semibold'
-                        : 'text-slate-300 hover:bg-slate-900/60'
-                    }`}
-                  >
-                    <span className="text-slate-600 select-none w-6 text-right shrink-0">
-                      {lineNum}
-                    </span>
-                    <span className="whitespace-pre">{line}</span>
+                {/* Complexity badges */}
+                <div className="mt-4 pt-4 border-t border-slate-800 grid grid-cols-2 gap-3 text-xs">
+                  <div className="bg-slate-950/80 p-3 rounded-xl border border-slate-800/80">
+                    <span className="text-slate-400 block text-[10px] uppercase font-mono mb-0.5">Tiempo:</span>
+                    <span className="text-emerald-400 font-semibold font-mono text-xs">{algo.complexity.time}</span>
                   </div>
-                );
-              })}
-            </div>
-
-            {/* Complexity badges */}
-            <div className="mt-4 pt-3 border-t border-slate-800 grid grid-cols-2 gap-3 text-xs">
-              <div className="bg-slate-950/60 p-2.5 rounded-lg border border-slate-800">
-                <span className="text-slate-400 block text-[10px] uppercase font-mono">Tiempo:</span>
-                <span className="text-emerald-400 font-medium font-mono">{algo.complexity.time}</span>
-              </div>
-              <div className="bg-slate-950/60 p-2.5 rounded-lg border border-slate-800">
-                <span className="text-slate-400 block text-[10px] uppercase font-mono">Memoria:</span>
-                <span className="text-blue-400 font-medium font-mono">{algo.complexity.space}</span>
+                  <div className="bg-slate-950/80 p-3 rounded-xl border border-slate-800/80">
+                    <span className="text-slate-400 block text-[10px] uppercase font-mono mb-0.5">Memoria:</span>
+                    <span className="text-blue-400 font-semibold font-mono text-xs">{algo.complexity.space}</span>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      </div>
     </div>
   );
 }
